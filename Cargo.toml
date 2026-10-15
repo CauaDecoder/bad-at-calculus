@@ -1,0 +1,47 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/mv-domain",
+    "crates/mv-application",
+    "crates/mv-infra",
+    "crates/mv-api",
+    "crates/mv-wasm",
+    "apps/desktop/src-tauri",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/<owner>/math-view"
+rust-version = "1.85"
+
+[workspace.dependencies]
+# Internal crates — the dependency rule points inward:
+# domain <- application <- infra <- api <- (wasm | desktop)
+mv-domain = { path = "crates/mv-domain" }
+mv-application = { path = "crates/mv-application" }
+mv-infra = { path = "crates/mv-infra" }
+mv-api = { path = "crates/mv-api" }
+
+# External crates (only allowed in outer layers, see docs/03-arquitetura/camadas.md)
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "1"
+wasm-bindgen = "0.2"
+serde-wasm-bindgen = "0.6"
+# Pure numerical library, allowed in the domain (ADR 0004).
+nalgebra = { version = "0.33", default-features = false, features = ["std"] }
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+unwrap_used = "deny"
+expect_used = "deny"
+panic = "deny"
+
+[profile.release]
+lto = true
+codegen-units = 1
+opt-level = 3

@@ -1,0 +1,18 @@
+{
+  "name": "math-view",
+  "private": true,
+  "version": "0.1.0",
+  "description": "A fast, open source visual lab for math and physics.",
+  "license": "MIT OR Apache-2.0",
+  "packageManager": "pnpm@9.12.0",
+  "scripts": {
+    "dev": "pnpm -C apps/web dev",
+    "build": "pnpm wasm:build && pnpm -C apps/web build",
+    "wasm:build": "wasm-pack build crates/mv-wasm --target web --out-dir ../../apps/web/src/lib/wasm/pkg",
+    "desktop:dev": "pnpm -C apps/desktop dev",
+    "desktop:build": "pnpm -C apps/desktop build",
+    "check": "pnpm -C apps/web check",
+    "lint": "pnpm -C apps/web lint",
+    "test": "cargo test --workspace && pnpm -C apps/web test"
+  }
+}

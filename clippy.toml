@@ -1,0 +1,4 @@
+# Keep functions small and readable (see docs/05-engenharia/clean-code.md).
+too-many-arguments-threshold = 4
+too-many-lines-threshold = 60
+cognitive-complexity-threshold = 15

@@ -1,0 +1,15 @@
+[package]
+name = "mv-domain"
+description = "Pure mathematical entities of Math View: expressions, functions, vectors."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+# Only pure numerical libraries are allowed here: no I/O, no frameworks,
+# no serialization (see docs/03-arquitetura/adr/0004-bibliotecas-matematicas-no-dominio.md).
+[dependencies]
+nalgebra.workspace = true
+
+[lints]
+workspace = true

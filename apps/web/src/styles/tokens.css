@@ -1,0 +1,121 @@
+/*
+ * Design tokens — single source of truth for the UI.
+ * Documented in docs/04-design/design-system.md. Change both together.
+ * Components must use these variables, never raw hex values.
+ */
+
+:root {
+  /* Typography */
+  --font-sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'Cascadia Code', monospace;
+
+  --text-xs: 0.75rem; /* 12px — captions, axis labels */
+  --text-sm: 0.875rem; /* 14px — UI default */
+  --text-md: 1rem; /* 16px — body, inputs */
+  --text-lg: 1.25rem; /* 20px — panel titles */
+  --text-xl: 1.5rem; /* 24px — page titles */
+
+  /* Spacing — 4px grid */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-full: 999px;
+
+  /* Layout */
+  --layout-sidebar-width: 232px;
+  --layout-inspector-width: 380px;
+
+  /* Motion */
+  --duration-fast: 120ms;
+  --duration-normal: 200ms;
+  --easing-standard: cubic-bezier(0.2, 0, 0, 1);
+
+  /* Color — light theme (neutral zinc + indigo accent) */
+  --color-bg: #fafafa;
+  --color-surface: #ffffff;
+  --color-surface-hover: #f4f4f5;
+  --color-border: #e4e4e7;
+  --color-text: #18181b;
+  --color-text-muted: #71717a;
+  --color-accent: #4f46e5;
+  --color-accent-soft: #eef2ff;
+  --color-success: #16a34a;
+  --color-warning: #d97706;
+  --color-danger: #dc2626;
+
+  /* Plot palette — semantic, color-blind friendly */
+  --color-plot-bg: #ffffff;
+  --color-plot-grid: #f1f1f3;
+  --color-plot-axis: #a1a1aa;
+  --color-plot-function: #18181b;
+  --color-plot-tangent: #16a34a;
+  --color-plot-derivative: #e11d48;
+  --color-plot-point: #4f46e5;
+  --color-plot-series-4: #0891b2;
+  --color-plot-series-5: #d97706;
+  /* Integrals: signed area and Riemann rectangles */
+  --color-plot-area-positive: rgba(79, 70, 229, 0.16);
+  --color-plot-area-negative: rgba(225, 29, 72, 0.14);
+  --color-plot-riemann-fill: rgba(22, 163, 74, 0.14);
+  --color-plot-riemann-stroke: rgba(22, 163, 74, 0.7);
+  /* Vectors (3D): u, v, w and results */
+  --color-vector-u: #4f46e5;
+  --color-vector-v: #16a34a;
+  --color-vector-w: #d97706;
+  --color-vector-result: #e11d48;
+  --color-vector-extra: #0891b2;
+  --color-plane-fill: rgba(79, 70, 229, 0.12);
+  --color-axis-x: #dc2626;
+  --color-axis-y: #16a34a;
+  --color-axis-z: #2563eb;
+
+  /* Elevation — subtle, borders do most of the work */
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.04);
+  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.06);
+  --shadow-lg: 0 12px 32px rgb(0 0 0 / 0.1);
+}
+
+:root[data-theme='dark'] {
+  --color-bg: #09090b;
+  --color-surface: #18181b;
+  --color-surface-hover: #27272a;
+  --color-border: #27272a;
+  --color-text: #fafafa;
+  --color-text-muted: #a1a1aa;
+  --color-accent: #818cf8;
+  --color-accent-soft: #1e1b4b;
+
+  --color-plot-bg: #0f0f12;
+  --color-plot-grid: #1c1c21;
+  --color-plot-axis: #52525b;
+  --color-plot-function: #fafafa;
+  --color-plot-tangent: #4ade80;
+  --color-plot-derivative: #fb7185;
+  --color-plot-point: #818cf8;
+  --color-plot-area-positive: rgba(129, 140, 248, 0.2);
+  --color-plot-area-negative: rgba(251, 113, 133, 0.18);
+  --color-plot-riemann-fill: rgba(74, 222, 128, 0.14);
+  --color-plot-riemann-stroke: rgba(74, 222, 128, 0.7);
+  --color-vector-u: #818cf8;
+  --color-vector-v: #4ade80;
+  --color-vector-w: #fbbf24;
+  --color-vector-result: #fb7185;
+  --color-vector-extra: #22d3ee;
+  --color-plane-fill: rgba(129, 140, 248, 0.16);
+  --color-axis-x: #f87171;
+  --color-axis-y: #4ade80;
+  --color-axis-z: #60a5fa;
+
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 4px 12px rgb(0 0 0 / 0.5);
+  --shadow-lg: 0 12px 32px rgb(0 0 0 / 0.6);
+}

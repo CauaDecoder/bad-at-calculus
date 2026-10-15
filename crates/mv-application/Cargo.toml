@@ -1,0 +1,14 @@
+[package]
+name = "mv-application"
+description = "Use cases and ports (traits) of Math View."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+mv-domain.workspace = true
+thiserror.workspace = true
+
+[lints]
+workspace = true
