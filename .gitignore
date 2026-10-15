@@ -55,3 +55,13 @@ desktop.ini
 .env
 .env.*
 !.env.example
+
+# ─── Conteúdo de terceiros (ADR 0012) ───────────────────────────────
+# Listas, apostilas e slides de professores: ficam só na máquina do estudante,
+# importados no app como pacote privado. Nunca versionar.
+content-private/
+
+# ─── Capturas de produtos de terceiros (Mobbin etc.) ───────────────
+# Referência visual só local: são telas de produtos comerciais. A descrição
+# de cada uma está em docs/references/design/README.md.
+docs/references/design/capturas/

@@ -1,9 +1,13 @@
 # Casos de uso — Cálculo A
 
-As listas em [`docs/exercices/`](../exercices/) (MAT01199 — Cálculo A, IME) são o **critério de
-aceitação real** do módulo de cálculo: se um estudante consegue resolver/visualizar os exercícios com
-o Math View, o módulo está cumprindo seu papel. Vários exemplos clicáveis das páginas vêm daqui, e
-os testes do domínio usam estas funções.
+As listas de MAT01199 — Cálculo A (IME/UFRGS) são o **critério de aceitação real** do módulo de
+cálculo: se um estudante consegue resolver/visualizar os exercícios no Laboratório, o módulo está
+cumprindo seu papel. Vários exemplos clicáveis das páginas vêm daqui, e os testes do domínio usam
+estas funções (as funções em si, não o texto das listas).
+
+Os PDFs são material de terceiros e ficam em `content-private/calculo/`, **fora do git**. Na F1
+eles viram um pack privado, e a Lista 04 é o critério de aceite dos Exercícios
+([roadmap](roadmap.md#f1--exercícios-offline-mvp), [ADR 0012](../03-arquitetura/adr/0012-conteudo-de-terceiros-e-licencas.md)).
 
 Legenda: ✅ disponível · 🟡 parcial · 🔜 planejado
 

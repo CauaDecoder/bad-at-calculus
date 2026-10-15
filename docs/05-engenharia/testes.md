@@ -9,7 +9,8 @@
 
 ## Domínio (`mv-domain`) — a base
 - Testes no próprio arquivo (`#[cfg(test)] mod tests`).
-- Use os exercícios das [listas de Cálculo A](../exercices/) como casos reais:
+- Use as funções das [listas de Cálculo A](../02-produto/casos-de-uso-calculo-a.md) como casos reais
+  (os PDFs ficam em `content-private/`, fora do git — [ADR 0012](../03-arquitetura/adr/0012-conteudo-de-terceiros-e-licencas.md)):
   tangente horizontal de `x³ − 3x + 4` em `x = ±1`, `f'(x) = 2x` para `x²` etc.
 - Floats: compare com tolerância, nunca `==` em resultados calculados.
 
