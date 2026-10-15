@@ -5,14 +5,13 @@
   - the *idea* of variant C (things move with the scroll), adapted to A's own pieces instead of
     a separate scene: each feature screenshot is driven by how far it has scrolled —
     the tangent sweeps the curve, answers type themselves and get corrected, review cards
-    line up by due date. Sections also reveal on scroll and the hero demo has a light parallax.
+    line up by due date. Texts, cards and fields fade in gradually while the page scrolls (and fade back when scrolling up); the hero demo has a light parallax.
 -->
 <script lang="ts">
   import { onMount } from 'svelte';
   import { functions } from '../mock';
   import TangentGraph from '../widgets/TangentGraph.svelte';
-  import { reveal } from '../widgets/reveal';
-  import { scrollProgress, segment } from '../widgets/scroll-progress';
+  import { scrollFade, scrollProgress, segment } from '../widgets/scroll-progress';
 
   const heroFunctions = [
     {
@@ -191,18 +190,18 @@
     </div>
   </header>
 
-  <section class="proof reveal" use:reveal>
-    <span><b>7</b> tópicos prontos</span>
-    <span><b>0</b> cadastros</span>
-    <span>motor em <b>Rust</b> no navegador</span>
-    <span>licença <b>MIT</b></span>
+  <section class="proof" use:scrollFade>
+    <span class="fade" style:--d="0"><b>7</b> tópicos prontos</span>
+    <span class="fade" style:--d="0.1"><b>0</b> cadastros</span>
+    <span class="fade" style:--d="0.2">motor em <b>Rust</b> no navegador</span>
+    <span class="fade" style:--d="0.3">licença <b>MIT</b></span>
   </section>
 
-  <section class="pains">
-    <h2 class="reveal" use:reveal>Estudar exatas não deveria ser adivinhar onde errou</h2>
+  <section class="pains" use:scrollFade>
+    <h2 class="fade" style:--d="0">Estudar exatas não deveria ser adivinhar onde errou</h2>
     <div class="three">
       {#each pains as p, i (p.title)}
-        <article class="reveal" use:reveal style:transition-delay={`${i * 90}ms`}>
+        <article class="fade" style:--d={0.15 + i * 0.12}>
           <h3>{p.title}</h3>
           <p>{p.body}</p>
         </article>
@@ -213,12 +212,17 @@
   <section class="features" id="como">
     {#each features as f, i (f.title)}
       <article class:flip={i % 2 === 1}>
-        <div class="reveal" use:reveal>
-          <span class="tag">{f.tag}</span>
-          <h3>{f.title}</h3>
-          <p>{f.body}</p>
+        <div use:scrollFade>
+          <span class="tag fade" style:--d="0">{f.tag}</span>
+          <h3 class="fade" style:--d="0.1">{f.title}</h3>
+          <p class="fade" style:--d="0.2">{f.body}</p>
         </div>
-        <div class="shot" use:scrollProgress={setProgress(i)}>
+        <div
+          class="shot fade"
+          style:--p={progress[i]}
+          style:--d="0"
+          use:scrollProgress={setProgress(i)}
+        >
           {#if i === 0}
             <TangentGraph
               f={functions.cubic.f}
@@ -232,7 +236,12 @@
           {:else if i === 1}
             {#each answers as a, j (a.text)}
               {@const t = typed(j)}
-              <div class="fake-input big typing" class:wrong={!a.ok} class:done={t.done}>
+              <div
+                class="fake-input big typing fade"
+                style:--d={a.from - 0.05}
+                class:wrong={!a.ok}
+                class:done={t.done}
+              >
                 <span class="typed">{t.shown}<span class="caret" class:hide={t.done}></span></span>
                 {#if t.done}<span class={a.ok ? 'ok' : 'bad'}>{a.verdict}</span>{/if}
               </div>
@@ -258,20 +267,22 @@
     {/each}
   </section>
 
-  <section class="faq reveal" id="faq" use:reveal>
-    <h2>Perguntas</h2>
-    {#each faq as item (item.q)}
-      <details>
+  <section class="faq" id="faq" use:scrollFade>
+    <h2 class="fade" style:--d="0">Perguntas</h2>
+    {#each faq as item, i (item.q)}
+      <details class="fade" style:--d={0.08 + i * 0.08}>
         <summary>{item.q}</summary>
         <p>{item.a}</p>
       </details>
     {/each}
   </section>
 
-  <section class="final reveal" use:reveal>
-    <h2>Sua próxima lista, corrigida na hora.</h2>
-    <a class="primary" href="/prototype/exercicio?variant=D">Resolver um exercício agora</a>
-    <p class="trigger">Grátis · sem cadastro · funciona offline</p>
+  <section class="final" use:scrollFade>
+    <h2 class="fade" style:--d="0">Sua próxima lista, corrigida na hora.</h2>
+    <a class="primary fade" style:--d="0.15" href="/prototype/exercicio?variant=D"
+      >Resolver um exercício agora</a
+    >
+    <p class="trigger fade" style:--d="0.25">Grátis · sem cadastro · funciona offline</p>
   </section>
 </div>
 
@@ -288,16 +299,15 @@
     background: var(--bg);
   }
 
-  /* ── Scroll reveal (from variant C's motion) ─────────────────────── */
-  .reveal {
-    transition:
-      opacity 700ms cubic-bezier(0.2, 0.9, 0.1, 1),
-      transform 700ms cubic-bezier(0.2, 0.9, 0.1, 1);
-  }
-
-  .reveal:not(:global(.is-visible)) {
-    opacity: 0;
-    transform: translateY(28px);
+  /* ── Gradual fade while scrolling (the idea of variant C) ─────────────
+     The parent writes its scroll progress into --p (use:scrollFade, or style:--p on the
+     shots). Each .fade child starts at its own --d and fades + rises as --p grows, and
+     fades back when scrolling up. */
+  .fade {
+    --q: clamp(0, calc((var(--p, 1) - var(--d, 0)) * 2.2), 1);
+    opacity: calc(0.08 + 0.92 * var(--q));
+    transform: translateY(calc((1 - var(--q)) * 26px));
+    will-change: opacity, transform;
   }
 
   nav {
@@ -789,7 +799,11 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
-    .reveal,
+    .fade {
+      opacity: 1;
+      transform: none;
+    }
+
     .caret {
       transition: none;
       animation: none;

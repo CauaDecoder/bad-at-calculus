@@ -33,6 +33,15 @@ export function scrollProgress(node: HTMLElement, onProgress: (progress: number)
   };
 }
 
+/**
+ * `use:scrollFade`: writes the scroll progress into the `--p` CSS custom property, so children
+ * with the `.fade` class can fade and rise gradually *while* the page scrolls (and fade back when
+ * scrolling up). Each child may set `--d` (0..1) to start later, giving a staggered entrance.
+ */
+export function scrollFade(node: HTMLElement) {
+  return scrollProgress(node, (p) => node.style.setProperty('--p', p.toFixed(3)));
+}
+
 /** Maps overall progress `p` to a sub-range [from, to] → 0..1 (for staggered pieces). */
 export function segment(p: number, from: number, to: number): number {
   return Math.min(1, Math.max(0, (p - from) / (to - from)));
