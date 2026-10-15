@@ -1,0 +1,16 @@
+Content license — Vértice public exercise bank
+
+Unless a file states otherwise in its `source.license` field, all content in this directory
+(exercises, lists, taxonomy, images and other assets) is licensed under the
+Creative Commons Attribution-ShareAlike 4.0 International License (CC BY-SA 4.0).
+
+Full legal code: https://creativecommons.org/licenses/by-sa/4.0/legalcode
+Summary:         https://creativecommons.org/licenses/by-sa/4.0/
+
+Attribution: "Vértice contributors" plus the authors listed in each item's `source.authors`.
+
+Content imported from other open sources (for example OpenStax, CC BY 4.0) keeps its original
+license and attribution in `source`. Third-party material without an open license must never be
+added here; see docs/03-arquitetura/adr/0012-conteudo-de-terceiros-e-licencas.md.
+
+The source code of this repository is licensed separately under MIT OR Apache-2.0.
