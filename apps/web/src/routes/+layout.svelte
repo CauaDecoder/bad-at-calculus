@@ -16,8 +16,12 @@
   import AppShell from '$lib/ui/layout/AppShell.svelte';
   import ModuleNav from '$lib/ui/layout/ModuleNav.svelte';
   import { provideTheme } from '$lib/ui/theme-context';
+  import { page } from '$app/state';
 
   let { children }: { children: Snippet } = $props();
+
+  // PROTOTYPE: design prototypes bring their own shell (docs/references/design/README.md).
+  const isPrototype = $derived(page.url.pathname.startsWith('/prototype'));
 
   const theme = new ThemeController(
     new LocalPreferenceStore(),
@@ -31,27 +35,31 @@
   });
 </script>
 
-<AppShell>
-  {#snippet sidebar()}
-    <a href="/" class="brand">
-      <span class="logo" aria-hidden="true">f′</span>
-      <span class="brand-name">Math View</span>
-    </a>
-
-    <ModuleNav />
-
-    <footer class="sidebar-footer">
-      <span class="version">v0.3</span>
-      <IconButton
-        icon={theme.theme === 'dark' ? 'sun' : 'moon'}
-        label={theme.theme === 'dark' ? 'Usar tema claro' : 'Usar tema escuro'}
-        onclick={() => theme.toggle()}
-      />
-    </footer>
-  {/snippet}
-
+{#if isPrototype}
   {@render children()}
-</AppShell>
+{:else}
+  <AppShell>
+    {#snippet sidebar()}
+      <a href="/" class="brand">
+        <span class="logo" aria-hidden="true">f′</span>
+        <span class="brand-name">Math View</span>
+      </a>
+
+      <ModuleNav />
+
+      <footer class="sidebar-footer">
+        <span class="version">v0.3</span>
+        <IconButton
+          icon={theme.theme === 'dark' ? 'sun' : 'moon'}
+          label={theme.theme === 'dark' ? 'Usar tema claro' : 'Usar tema escuro'}
+          onclick={() => theme.toggle()}
+        />
+      </footer>
+    {/snippet}
+
+    {@render children()}
+  </AppShell>
+{/if}
 
 <style>
   .brand {
