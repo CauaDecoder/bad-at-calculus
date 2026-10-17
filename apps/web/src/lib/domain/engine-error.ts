@@ -1,5 +1,5 @@
 /**
- * Structured error returned by the Rust engine (`mv_api::ApiError`).
+ * Structured error returned by the Rust engine (`vx_api::ApiError`).
  * The UI turns `code` into a Portuguese message (see `$lib/ui/copy/engine-messages`).
  */
 export interface EngineError {

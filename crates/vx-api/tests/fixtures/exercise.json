@@ -1,0 +1,14 @@
+{
+  "schemaVersion": 1,
+  "id": "0192f7a4-6c1e-7b3a-9d2e-5f8a1c3b7e90",
+  "revision": 1,
+  "locale": "pt-BR",
+  "title": "Soma de duas constantes",
+  "statement": "Calcule a soma de $2$ e $3$.",
+  "parts": [{ "label": "a", "prompt": "Qual é a soma?", "answer": { "type": "numeric", "value": "5" } }],
+  "skills": ["aritmetica.operacoes.adicao"],
+  "difficulty": 1,
+  "source": { "kind": "authored", "license": "CC-BY-SA-4.0", "authors": ["Vértice"] },
+  "visibility": "public",
+  "references": [{ "type": "webpage", "title": "Adição", "url": "https://pt.wikipedia.org/wiki/Adi%C3%A7%C3%A3o", "license": "CC-BY-SA-4.0" }]
+}

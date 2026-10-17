@@ -24,5 +24,5 @@ export default tseslint.config(
       ],
     },
   },
-  { ignores: ['.svelte-kit/', 'build/', 'src/lib/wasm/pkg/'] },
+  { ignores: ['.svelte-kit/', 'build/', 'src/lib/wasm/pkg/', 'vite.config.*.timestamp-*'] },
 );

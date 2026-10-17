@@ -11,7 +11,7 @@ Como o texto digitado vira números, gráficos e resoluções passo a passo.
  (amostras)     (KaTeX)       (+ passos)        (laterais)      (Simpson)     (tabela)
 ```
 
-## 1. Expressões — `mv_domain::expression`
+## 1. Expressões — `vx_domain::expression`
 
 Árvore imutável: `Number`, `Constant` (π, e), `Variable`, `Negate`, `Binary`, `Call` e
 `Piecewise` (função por partes). Funções: `sin cos tan ln log exp sqrt cbrt abs`.
@@ -24,7 +24,7 @@ Como o texto digitado vira números, gráficos e resoluções passo a passo.
 - `to_latex()` — só os parênteses necessários; justapõe como no papel (`2x`, `x cos(x)`) e usa
   `\cdot` só onde seria ambíguo (`2 \cdot 3`).
 
-## 2. Parser — `mv_infra::parser::PrattParser`
+## 2. Parser — `vx_infra::parser::PrattParser`
 
 Pratt parser escrito à mão (mensagens de erro com posição).
 

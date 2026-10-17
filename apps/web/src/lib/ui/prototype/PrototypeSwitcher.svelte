@@ -35,6 +35,7 @@
     if (!next) return;
     const url = new URL(page.url);
     url.searchParams.set('variant', next.key);
+    // eslint-disable-next-line svelte/no-navigation-without-resolve -- prototype: the variant lives in the ?variant= query, which resolve() does not take
     goto(url, { replaceState: true, noScroll: true, keepFocus: true });
   }
 
@@ -55,12 +56,14 @@
     <span class="label"><strong>{current?.key}</strong> {current?.name}</span>
     <button type="button" onclick={() => select(1)} aria-label="Próxima variante">→</button>
     <span class="sep" aria-hidden="true"></span>
+    <!-- eslint-disable svelte/no-navigation-without-resolve -- prototype: the variant lives in the ?variant= query, which resolve() does not take -->
     {#each screens as screen (screen.href)}
       <a
         href={`${screen.href}?variant=${screen.chosen}`}
         aria-current={page.url.pathname === screen.href ? 'page' : undefined}>{screen.label}</a
       >
     {/each}
+    <!-- eslint-enable svelte/no-navigation-without-resolve -->
   </div>
 {/if}
 

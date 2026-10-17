@@ -4,6 +4,7 @@
   "o que fazer agora" column so the data always ends in an action.
 -->
 <script lang="ts">
+  import { resolve } from '$app/paths';
   import { accuracy, exam, functions, masteryByTopic, student, type RangeKey } from '../mock';
   import Donut from '../widgets/Donut.svelte';
   import LineChart from '../widgets/LineChart.svelte';
@@ -54,7 +55,7 @@
           Faltam <b>{exam.daysLeft} dias</b>. Com 3 itens por dia você chega a <b>86%</b> na véspera.
         </p>
       </div>
-      <a class="cta" href="/prototype/exercicio?variant=C">Estudar agora — 25 min</a>
+      <a class="cta" href={resolve('/prototype/exercicio')}>Estudar agora — 25 min</a>
     </section>
 
     <section class="card donut-card">

@@ -4,6 +4,7 @@
   exam countdown as the top-left KPI.
 -->
 <script lang="ts">
+  import { resolve } from '$app/paths';
   import { disciplines, exam, recentLists, setupSteps, student, todos } from '../mock';
   import MorphSelect from '../widgets/MorphSelect.svelte';
   import RollingNumber from '../widgets/RollingNumber.svelte';
@@ -15,7 +16,7 @@
 
 <div class="a">
   <aside class="side">
-    <a class="brand" href="/prototype/inicio?variant=A"><span class="mark">V</span> Vértice</a>
+    <a class="brand" href={resolve('/prototype/inicio')}><span class="mark">V</span> Vértice</a>
     <button class="search" type="button">Buscar <kbd>Ctrl K</kbd></button>
     <nav>
       <p>Estudar</p>
@@ -51,7 +52,7 @@
         <div class="bar"><span style:width="42%"></span></div>
         <small>42% da lista · 11 itens prontos para a prova</small>
       </div>
-      <a class="primary" href="/prototype/exercicio?variant=A">Continuar item 8 →</a>
+      <a class="primary" href={resolve('/prototype/exercicio')}>Continuar item 8 →</a>
     </section>
 
     <div class="cols">

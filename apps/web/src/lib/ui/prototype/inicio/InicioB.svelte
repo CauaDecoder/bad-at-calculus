@@ -4,6 +4,7 @@
   pastel KPI tiles that each carry a sentence of context.
 -->
 <script lang="ts">
+  import { resolve } from '$app/paths';
   import { exam, functions, recentLists, student } from '../mock';
   import RollingNumber from '../widgets/RollingNumber.svelte';
   import TangentGraph from '../widgets/TangentGraph.svelte';
@@ -73,7 +74,7 @@
           <div class="preview-side">
             <b>f(x) = {preview.label}</b>
             <p>Arraste o ponto. A tangente e f′ acompanham.</p>
-            <a href="/prototype/exercicio?variant=B">Praticar exercícios com esta função →</a>
+            <a href={resolve('/prototype/exercicio')}>Praticar exercícios com esta função →</a>
           </div>
         </div>
       {/if}
@@ -101,7 +102,7 @@
       <div class="grid">
         <a class="new" href="#importar">＋<span>Importar ou criar lista</span></a>
         {#each recentLists as list (list.title)}
-          <a class="list" href="/prototype/exercicio?variant=B">
+          <a class="list" href={resolve('/prototype/exercicio')}>
             <span class="thumb">
               <svg viewBox="0 0 100 40" aria-hidden="true"
                 ><path d="M0 30 C 20 5, 40 5, 50 20 S 80 38, 100 8" /></svg

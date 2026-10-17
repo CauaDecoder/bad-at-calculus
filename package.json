@@ -1,17 +1,22 @@
 {
-  "name": "math-view",
+  "name": "vertice",
   "private": true,
   "version": "0.1.0",
   "description": "A fast, open source visual lab for math and physics.",
   "license": "MIT OR Apache-2.0",
   "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": "^22.12.0 || ^24.0.0 || >=26.0.0"
+  },
   "scripts": {
     "dev": "pnpm -C apps/web dev",
     "build": "pnpm wasm:build && pnpm -C apps/web build",
-    "wasm:build": "wasm-pack build crates/mv-wasm --target web --out-dir ../../apps/web/src/lib/wasm/pkg",
+    "wasm:build": "wasm-pack build crates/vx-wasm --target web --out-dir ../../apps/web/src/lib/wasm/pkg",
     "desktop:dev": "pnpm -C apps/desktop dev",
     "desktop:build": "pnpm -C apps/desktop build",
     "check": "pnpm -C apps/web check",
+    "contracts:generate": "cargo run -p vx-api --example generate_content_contracts",
+    "contracts:check": "cargo run -p vx-api --example generate_content_contracts -- --check",
     "lint": "pnpm -C apps/web lint",
     "test": "cargo test --workspace && pnpm -C apps/web test"
   }

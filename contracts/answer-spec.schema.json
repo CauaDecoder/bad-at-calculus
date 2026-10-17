@@ -1,0 +1,616 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "AnswerSpec",
+  "description": "All nine F1 answer kinds. `code` and `sql` are intentionally unsupported.",
+  "oneOf": [
+    {
+      "description": "Constant expression and optional numeric comparison metadata.",
+      "type": "object",
+      "required": [
+        "type",
+        "value"
+      ],
+      "properties": {
+        "feedback": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feedback"
+          }
+        },
+        "tolerance": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Tolerance"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "numeric"
+          ]
+        },
+        "unit": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "value": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "description": "Expected expression and deterministic sampling settings.",
+      "type": "object",
+      "required": [
+        "expected",
+        "type",
+        "variables"
+      ],
+      "properties": {
+        "domain": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "maxItems": 2,
+            "minItems": 2
+          }
+        },
+        "expected": {
+          "type": "string",
+          "minLength": 1
+        },
+        "feedback": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feedback"
+          }
+        },
+        "form": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/ExpressionForm"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "samples": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint32",
+          "minimum": 12.0
+        },
+        "tolerance": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Tolerance"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "expression"
+          ]
+        },
+        "variables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "description": "Equation represented as `lhs = rhs`.",
+      "type": "object",
+      "required": [
+        "expected",
+        "type",
+        "variables"
+      ],
+      "properties": {
+        "domain": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "maxItems": 2,
+            "minItems": 2
+          }
+        },
+        "expected": {
+          "type": "string",
+          "minLength": 1
+        },
+        "feedback": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feedback"
+          }
+        },
+        "samples": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint32",
+          "minimum": 12.0
+        },
+        "tolerance": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/Tolerance"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "equation"
+          ]
+        },
+        "variables": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "description": "Unordered collection; `ordered` must be false.",
+      "type": "object",
+      "required": [
+        "ordered",
+        "type",
+        "values"
+      ],
+      "properties": {
+        "feedback": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feedback"
+          }
+        },
+        "ordered": {
+          "type": "boolean",
+          "enum": [
+            false
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "set"
+          ]
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScalarAnswerSpec"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "description": "Ordered, nonempty collection.",
+      "type": "object",
+      "required": [
+        "type",
+        "values"
+      ],
+      "properties": {
+        "feedback": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feedback"
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "tuple"
+          ]
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ScalarAnswerSpec"
+          },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "description": "Nonempty rectangular matrix of scalar specifications.",
+      "type": "object",
+      "required": [
+        "rows",
+        "type"
+      ],
+      "properties": {
+        "feedback": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feedback"
+          }
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ScalarAnswerSpec"
+            },
+            "minItems": 1
+          },
+          "minItems": 1
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "matrix"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "description": "Single or multiple choice specification.",
+      "type": "object",
+      "required": [
+        "correct",
+        "multiple",
+        "options",
+        "type"
+      ],
+      "properties": {
+        "correct": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "feedback": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feedback"
+          }
+        },
+        "multiple": {
+          "type": "boolean"
+        },
+        "options": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnswerOption"
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "choice"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "description": "Matching specification with stable option identities.",
+      "type": "object",
+      "required": [
+        "left",
+        "pairs",
+        "right",
+        "type"
+      ],
+      "properties": {
+        "feedback": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feedback"
+          }
+        },
+        "left": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnswerOption"
+          }
+        },
+        "pairs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "partialCredit": {
+          "default": false,
+          "type": "boolean"
+        },
+        "right": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AnswerOption"
+          }
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "matching"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    {
+      "description": "Manual comparison with a rubric, never automatic grading.",
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "feedback": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Feedback"
+          }
+        },
+        "rubric": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "self_graded"
+          ]
+        }
+      },
+      "additionalProperties": false
+    }
+  ],
+  "definitions": {
+    "AnswerOption": {
+      "description": "Stable identity and display text of an objective option.",
+      "type": "object",
+      "required": [
+        "id",
+        "text"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "text": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ExpressionForm": {
+      "description": "Required structural expression form.",
+      "type": "string",
+      "enum": [
+        "factored",
+        "expanded",
+        "no_negative_exponents"
+      ]
+    },
+    "Feedback": {
+      "description": "Feedback for a predictable incorrect answer.",
+      "type": "object",
+      "required": [
+        "matches",
+        "message"
+      ],
+      "properties": {
+        "matches": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ScalarAnswerSpec": {
+      "description": "Nonrecursive scalar element of a collection (ADR 0016).",
+      "oneOf": [
+        {
+          "description": "Constant expression and optional numeric comparison metadata.",
+          "type": "object",
+          "required": [
+            "type",
+            "value"
+          ],
+          "properties": {
+            "feedback": {
+              "default": [],
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Feedback"
+              }
+            },
+            "tolerance": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Tolerance"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "numeric"
+              ]
+            },
+            "unit": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "value": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "description": "Expected expression and deterministic sampling settings.",
+          "type": "object",
+          "required": [
+            "expected",
+            "type",
+            "variables"
+          ],
+          "properties": {
+            "domain": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "double"
+                },
+                "maxItems": 2,
+                "minItems": 2
+              }
+            },
+            "expected": {
+              "type": "string",
+              "minLength": 1
+            },
+            "feedback": {
+              "default": [],
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Feedback"
+              }
+            },
+            "form": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/ExpressionForm"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "samples": {
+              "type": [
+                "integer",
+                "null"
+              ],
+              "format": "uint32",
+              "minimum": 12.0
+            },
+            "tolerance": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/Tolerance"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "type": {
+              "type": "string",
+              "enum": [
+                "expression"
+              ]
+            },
+            "variables": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "minItems": 1
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "Tolerance": {
+      "description": "Absolute and relative comparison tolerances.",
+      "type": "object",
+      "properties": {
+        "abs": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double",
+          "minimum": 0.0
+        },
+        "rel": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "format": "double",
+          "minimum": 0.0
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

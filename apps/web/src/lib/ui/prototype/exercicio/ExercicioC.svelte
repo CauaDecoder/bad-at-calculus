@@ -4,6 +4,7 @@
   status of each item (Zeigarnik effect: open loops stay visible).
 -->
 <script lang="ts">
+  import { resolve } from '$app/paths';
   import { exercises } from '../mock';
   import { checkAnswer } from '../stub-check';
 
@@ -28,7 +29,7 @@
 
 <div class="ec">
   <aside class="rail">
-    <a href="/prototype/inicio?variant=C" class="brand"><span class="mark"></span>vértice</a>
+    <a href={resolve('/prototype/inicio')} class="brand"><span class="mark"></span>vértice</a>
     <p class="list">Derivadas — exemplo</p>
     <div class="ring" style:--p={`${(solved / keys.length) * 100}%`}>
       <span>{solved}/{keys.length}</span>

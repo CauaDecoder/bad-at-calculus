@@ -1,6 +1,6 @@
 /**
  * Matrices and linear systems as the UI sees them.
- * Mirrors the JSON of `crates/mv-api/src/linear_algebra.rs` (matrices are `number[][]`).
+ * Mirrors the JSON of `crates/vx-api/src/linear_algebra.rs` (matrices are `number[][]`).
  */
 import type { EngineError } from './engine-error';
 import { compactLatex } from './exact-format';

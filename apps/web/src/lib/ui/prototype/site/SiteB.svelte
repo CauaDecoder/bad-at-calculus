@@ -4,6 +4,7 @@
   type a function and get the graph, the derivative and the steps before any signup.
 -->
 <script lang="ts">
+  import { resolve } from '$app/paths';
   import { disciplines, functions } from '../mock';
   import MorphSelect from '../widgets/MorphSelect.svelte';
   import TangentGraph from '../widgets/TangentGraph.svelte';
@@ -33,7 +34,7 @@
     <span class="brand">Vértice</span>
     <span class="spacer"></span>
     <a href="#github">GitHub</a>
-    <a class="nav-cta" href="/prototype/inicio?variant=B">Abrir o app →</a>
+    <a class="nav-cta" href={resolve('/prototype/inicio')}>Abrir o app →</a>
   </nav>
 
   <header class="hero">
@@ -61,7 +62,7 @@
 
     <p class="after">Agora imagine a sua lista inteira assim, <b>corrigida item por item</b>.</p>
     <div class="ctas">
-      <a class="primary" href="/prototype/exercicio?variant=B">Importar minha lista</a>
+      <a class="primary" href={resolve('/prototype/exercicio')}>Importar minha lista</a>
       <span class="trigger">PDF, planilha ou foto · fica só no seu computador</span>
     </div>
   </header>

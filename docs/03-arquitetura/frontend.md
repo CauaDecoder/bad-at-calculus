@@ -31,7 +31,7 @@ src/
 │  │  ├─ layout/     AppShell, ModuleNav, TopicPage, Workspace, SplitPanel
 │  │  └─ copy/       textos em PT-BR: navegação, mensagens de erro, regras de derivação
 │  └─ wasm/pkg/      gerado por wasm-pack (ignorado no git)
-├─ routes/           uma página por tópico (calculo/*, vetores/*)
+├─ routes/           entrada do Site (/), índice /lab e tópicos /lab/calculo/*, /lab/vetores/*
 └─ styles/           tokens.css (design system), base.css
 ```
 
@@ -41,6 +41,21 @@ src/
 - `domain/` não importa nada de fora dele.
 - O `+layout.svelte` é o composition root: cria engines e tema uma vez (`provideEngines`,
   `provideTheme`); as páginas pegam com `useEngines()`/`useTheme()`.
+
+### Navegação estática (F0.4)
+
+- `/` é a entrada do Site; sua composição Site D pertence à F0.5. `/lab` reúne as disciplinas
+  do Laboratório. A marca e “Sobre a Vértice” voltam ao Site; “Laboratório” abre `/lab`.
+- As sete páginas antigas `/calculo/*` e `/vetores/*` continuam no build como entradas
+  estáticas. `LegacyRedirect` usa `location.replace` para abrir o tópico em `/lab/...`,
+  preservando query string e fragmento sem interpretar os parâmetros. Isso substitui a entrada
+  antiga no histórico; não depende de redirecionamento HTTP de um servidor.
+- Como o app já usa `ssr = false`, os redirecionamentos e as páginas dependem de JavaScript.
+  O host deve servir os arquivos `.html` por suas URLs sem extensão, ou usar o fallback SPA
+  existente. Os parâmetros de estado são preservados na URL; a desserialização tipada de
+  visualizações continua prevista para F1.
+- Módulos futuros aparecem com fase e rótulo “Planejado”, sem links. Abaixo de 900px, um botão
+  com `aria-expanded` abre a navegação e a navegação entre páginas fecha o menu.
 
 ## Estado
 

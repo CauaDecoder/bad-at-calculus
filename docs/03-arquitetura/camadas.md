@@ -1,6 +1,6 @@
 # Camadas em detalhe
 
-## 1. Domain — `crates/mv-domain`
+## 1. Domain — `crates/vx-domain`
 
 **O que é:** a matemática. Tipos e funções puras que seriam verdade em qualquer aplicação.
 
@@ -29,7 +29,7 @@ pub fn cross(self, other: Self) -> Self {
 }
 ```
 
-## 2. Application — `crates/mv-application`
+## 2. Application — `crates/vx-application`
 
 **O que é:** o que o estudante quer fazer. Cada caso de uso = uma intenção.
 
@@ -46,24 +46,31 @@ pub fn cross(self, other: Self) -> Self {
 Números digitados pelo estudante (`1/2`, `sqrt(3)`, `pi/4`) são interpretados pelo mesmo parser
 das funções e avaliados como constantes — por isso frações e raízes são aceitas em qualquer campo.
 
-**Pode importar:** `mv-domain`, `thiserror`.
+**Pode importar:** `vx-domain`, `thiserror`.
 **Não pode:** conhecer implementações (`PrattParser`), Tauri, WASM, arquivos.
 
-## 3. Interface adapters — `crates/mv-infra` e `crates/mv-api`
+## 3. Interface adapters — `crates/vx-infra` e `crates/vx-api`
 
-- **`mv-infra`**: `parser::PrattParser` (implementa `ExpressionParser`), `storage` (planejado).
-- **`mv-api`**: o contrato do motor — comandos, DTOs em JSON camelCase, `ApiError { code,
+- **`vx-infra`**: `parser::PrattParser` (implementa `ExpressionParser`), `storage` (planejado).
+- **`vx-api`**: o contrato do motor — comandos, DTOs em JSON camelCase, `ApiError { code,
   message, position?, field? }` e a função `dispatch`. Ver [ADR 0005](adr/0005-mv-api-dispatch-unico.md).
 
-**Podem importar:** `mv-application`, `mv-domain`, bibliotecas técnicas (`serde`…).
+**Podem importar:** `vx-application`, `vx-domain`, bibliotecas técnicas (`serde`…).
 **Não podem:** conhecer Tauri, WASM ou a UI.
 
-## 4. Frameworks & drivers — `crates/mv-wasm`, `apps/desktop`, `apps/web`
+Para os contratos de conteúdo e correção da F1, `serde`, `schemars` e `ts-rs` ficam somente
+em `vx-api`, não em `vx-infra` ou nas camadas internas. Os DTOs geram JSON Schema e TypeScript
+e são convertidos explicitamente para os tipos puros. `content::Part` consome
+`assessment::AnswerSpec` pela fachada pública Rust do domínio; casos de uso de conteúdo
+consomem a fachada pública de aplicação do corretor, nunca `dispatch`. Ver
+[ADR 0016](adr/0016-contrato-de-conteudo-f1.md).
+
+## 4. Frameworks & drivers — `crates/vx-wasm`, `apps/desktop`, `apps/web`
 
 **O que é:** a "cola" com o mundo real. **Uma função cada**, sem regras de negócio:
 
-- `mv-wasm`: `dispatch(command, request)` → `mv_api::dispatch`.
-- `apps/desktop/src-tauri`: comando `engine(command, request)` → `mv_api::dispatch`.
+- `vx-wasm`: `dispatch(command, request)` → `vx_api::dispatch`.
+- `apps/desktop/src-tauri`: comando `engine(command, request)` → `vx_api::dispatch`.
 - `apps/web`: interface Svelte, com suas próprias camadas ([frontend.md](frontend.md)).
 
 ## Como adicionar uma funcionalidade (receita)
@@ -72,7 +79,7 @@ Exemplo: "distância entre duas retas reversas".
 
 1. **Domínio:** `Line3::distance_to_line(&self, other) -> f64` + testes.
 2. **Aplicação:** caso de uso (ou campo novo no `PlaneReport`) + teste com fakes.
-3. **API:** DTO + handler em `mv-api/src/vectors.rs`; registrar o comando.
+3. **API:** DTO + handler em `vx-api/src/vectors.rs`; registrar o comando.
 4. **Front:** tipo em `lib/domain`, método no port e no adapter, estado em `lib/application`,
    componente em `lib/ui/vectors`.
 5. `pnpm wasm:build`.
@@ -80,8 +87,8 @@ Exemplo: "distância entre duas retas reversas".
 
 ## Sinais de violação (code review)
 
-- `use mv_infra` dentro de `mv-application` ou `mv-domain`.
-- `serde` derivado em tipos do domínio (use DTOs em `mv-api`).
-- Lógica em `mv-wasm` ou `commands.rs` além de repassar para `dispatch`.
+- `use vx_infra` dentro de `vx-application` ou `vx-domain`.
+- `serde` derivado em tipos do domínio (use DTOs em `vx-api`).
+- Lógica em `vx-wasm` ou `commands.rs` além de repassar para `dispatch`.
 - `import` de `@tauri-apps/*`, `$lib/wasm` ou `$lib/adapters` em `lib/ui` ou `lib/application`.
 - Cálculo matemático dentro de componente Svelte (formatar para LaTeX é apresentação e pode).

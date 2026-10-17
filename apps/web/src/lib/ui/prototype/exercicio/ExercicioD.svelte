@@ -3,6 +3,7 @@
   bar of variant B (recolored to the light-neutral palette). The bar grows as parts are solved.
 -->
 <script lang="ts">
+  import { resolve } from '$app/paths';
   import { SvelteSet } from 'svelte/reactivity';
   import { exercises, functions } from '../mock';
   import { checkAnswer } from '../stub-check';
@@ -55,7 +56,7 @@
 
 <div class="ea">
   <header>
-    <a href="/prototype/inicio?variant=A" class="close" aria-label="Voltar para o início">✕</a>
+    <a href={resolve('/prototype/inicio')} class="close" aria-label="Voltar para o início">✕</a>
     <span class="list-name">Derivadas — exemplo</span>
     <div
       class="progress"

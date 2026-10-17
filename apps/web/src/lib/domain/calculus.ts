@@ -1,5 +1,5 @@
 /**
- * Calculus results as the UI sees them. Mirrors the JSON of `crates/mv-api/src/calculus.rs`.
+ * Calculus results as the UI sees them. Mirrors the JSON of `crates/vx-api/src/calculus.rs`.
  */
 
 export interface DerivationStep {

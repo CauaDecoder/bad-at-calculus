@@ -1,4 +1,4 @@
-/** Portuguese messages for the engine's error codes (`mv_api::ApiError`). */
+/** Portuguese messages for the engine's error codes (`vx_api::ApiError`). */
 import type { EngineError } from '$lib/domain/engine-error';
 
 const MESSAGES: Record<string, string> = {

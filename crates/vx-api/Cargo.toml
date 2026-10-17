@@ -1,0 +1,23 @@
+[package]
+name = "vx-api"
+description = "Vértice engine API: serializable DTOs and a single command dispatcher shared by WASM and Tauri."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+vx-domain.workspace = true
+vx-application.workspace = true
+vx-infra.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+schemars = "0.8"
+ts-rs = { version = "10", features = ["serde-json-impl"] }
+serde_path_to_error = "0.1"
+
+[dev-dependencies]
+jsonschema = { version = "0.18", default-features = false }
+
+[lints]
+workspace = true

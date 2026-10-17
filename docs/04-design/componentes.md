@@ -6,8 +6,9 @@ nunca chamam o motor matemático diretamente.
 ### Layout (`ui/layout/`)
 | Componente    | Descrição                                                                        |
 | ------------- | -------------------------------------------------------------------------------- |
-| `AppShell`    | Sidebar + página; empilha abaixo de 960px                                        |
+| `AppShell`    | Sidebar de 248px + página; abaixo de 900px, menu expansível por teclado; link para pular ao conteúdo |
 | `ModuleNav`   | Módulos e tópicos (de `ui/copy/navigation.ts`), página atual destacada           |
+| `LegacyRedirect` | Entrada estática das URLs antigas; substitui a entrada no histórico e preserva query string e fragmento |
 | `TopicPage`   | Título do tópico + descrição + corpo com altura total                            |
 | `Workspace`   | Gráfico dominante + coluna de inspetor (tópicos visuais)                         |
 | `SplitPanel`  | Dados à esquerda, resolução à direita (matrizes, sistemas)                       |

@@ -5,6 +5,7 @@
   feedback, steps only after an attempt.
 -->
 <script lang="ts">
+  import { resolve } from '$app/paths';
   import { exercises, functions } from '../mock';
   import { checkAnswer } from '../stub-check';
   import TangentGraph from '../widgets/TangentGraph.svelte';
@@ -46,7 +47,7 @@
 
 <div class="ea">
   <header>
-    <a href="/prototype/inicio?variant=A" class="back">← Derivadas — exemplo</a>
+    <a href={resolve('/prototype/inicio')} class="back">← Derivadas — exemplo</a>
     <div class="dots" aria-label="Item 7 de 19">
       {#each Array.from({ length: 19 }, (_v, n) => n) as i (i)}
         <span class:done={i < 6} class:now={i === 6}></span>

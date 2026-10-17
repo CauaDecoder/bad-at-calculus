@@ -1,51 +1,71 @@
 <!-- Modules and their topics; the current page is highlighted. -->
 <script lang="ts">
   import { page } from '$app/state';
+  import { resolve } from '$app/paths';
   import Icon from '$lib/ui/components/Icon.svelte';
-  import { MODULES, UPCOMING_MODULES } from '$lib/ui/copy/navigation';
+  import { MODULES, NAVIGATION, UPCOMING_MODULES } from '$lib/ui/copy/navigation';
 
   const currentPath = $derived(page.url.pathname);
+  const inLab = $derived(
+    currentPath === resolve('/lab') || currentPath.startsWith(resolve('/lab') + '/'),
+  );
 </script>
 
-<nav aria-label="Módulos" class="nav">
-  <a href="/" class="home" aria-current={currentPath === '/' ? 'page' : undefined}>
-    <Icon name="home" />
-    Início
+<nav aria-label={NAVIGATION.study} class="nav">
+  <p class="module-title">{NAVIGATION.study}</p>
+  <a
+    href={resolve('/lab')}
+    class="home"
+    aria-current={currentPath === resolve('/lab') ? 'page' : undefined}
+  >
+    <Icon name="calculus" />
+    {NAVIGATION.lab}
   </a>
 
-  {#each MODULES as module (module.title)}
-    <section class="module">
-      <p class="module-title">
-        <Icon name={module.icon} size={14} />
-        {module.title}
-      </p>
-      <ul class="topics">
-        {#each module.topics as topic (topic.href)}
-          <li>
-            <a
-              href={topic.href}
-              class="topic"
-              aria-current={currentPath.startsWith(topic.href) ? 'page' : undefined}
-            >
-              {topic.title}
-            </a>
-          </li>
-        {/each}
-      </ul>
-    </section>
-  {/each}
-
-  <section class="module upcoming">
-    <p class="module-title">Em breve</p>
-    <ul class="topics">
-      {#each UPCOMING_MODULES as module (module.title)}
-        <li class="topic disabled">
+  {#if inLab}
+    {#each MODULES as module (module.title)}
+      <section class="module">
+        <p class="module-title">
           <Icon name={module.icon} size={14} />
           {module.title}
+        </p>
+        <ul class="topics">
+          {#each module.topics as topic (topic.href)}
+            <li>
+              <a
+                href={resolve(topic.href)}
+                class="topic"
+                aria-current={currentPath === resolve(topic.href) ? 'page' : undefined}
+              >
+                {topic.title}
+              </a>
+            </li>
+          {/each}
+        </ul>
+      </section>
+    {/each}
+  {/if}
+
+  <section class="module upcoming">
+    <p class="module-title">{NAVIGATION.upcoming}</p>
+    <ul class="topics">
+      {#each UPCOMING_MODULES as module (module.title)}
+        <li class="planned">
+          <span>{module.title}</span>
+          <span class="phase">{NAVIGATION.planned} · {module.phase}</span>
         </li>
       {/each}
     </ul>
   </section>
+
+  <a
+    href={resolve('/')}
+    class="home"
+    aria-current={currentPath === resolve('/') ? 'page' : undefined}
+  >
+    <Icon name="home" />
+    {NAVIGATION.site}
+  </a>
 </nav>
 
 <style>
@@ -112,11 +132,14 @@
     padding-left: calc(var(--space-2) + 22px);
   }
 
-  .upcoming .topic {
-    padding-left: var(--space-2);
+  .planned {
+    display: grid;
+    gap: var(--space-1);
+    padding: var(--space-2);
+    color: var(--color-text-muted);
   }
 
-  .disabled {
-    opacity: 0.55;
+  .phase {
+    font-size: var(--text-xs);
   }
 </style>

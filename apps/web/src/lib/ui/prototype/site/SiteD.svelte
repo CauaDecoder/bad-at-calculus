@@ -8,6 +8,7 @@
     line up by due date. Texts, cards and fields fade in gradually while the page scrolls (and fade back when scrolling up); the hero demo has a light parallax.
 -->
 <script lang="ts">
+  import { resolve } from '$app/paths';
   import { onMount } from 'svelte';
   import { functions } from '../mock';
   import TangentGraph from '../widgets/TangentGraph.svelte';
@@ -147,7 +148,7 @@
     <a href="#materias">Matérias</a>
     <a href="#faq">Perguntas</a>
     <a class="gh" href="#github">★ GitHub</a>
-    <a class="nav-cta" href="/prototype/inicio?variant=A">Abrir o app</a>
+    <a class="nav-cta" href={resolve('/prototype/inicio')}>Abrir o app</a>
   </nav>
 
   <header class="hero">
@@ -159,8 +160,8 @@
         que você erra, até o dia da prova.
       </p>
       <div class="ctas">
-        <a class="primary" href="/prototype/exercicio?variant=D">Resolver um exercício agora</a>
-        <a class="secondary" href="/prototype/inicio?variant=A">Abrir o laboratório</a>
+        <a class="primary" href={resolve('/prototype/exercicio')}>Resolver um exercício agora</a>
+        <a class="secondary" href={resolve('/prototype/inicio')}>Abrir o laboratório</a>
       </div>
       <p class="trigger">Grátis · sem cadastro · funciona offline</p>
     </div>
@@ -279,7 +280,7 @@
 
   <section class="final" use:scrollFade>
     <h2 class="fade" style:--d="0">Sua próxima lista, corrigida na hora.</h2>
-    <a class="primary fade" style:--d="0.15" href="/prototype/exercicio?variant=D"
+    <a class="primary fade" style:--d="0.15" href={resolve('/prototype/exercicio')}
       >Resolver um exercício agora</a
     >
     <p class="trigger fade" style:--d="0.25">Grátis · sem cadastro · funciona offline</p>

@@ -4,6 +4,7 @@
 -->
 <script lang="ts">
   import type { Snippet } from 'svelte';
+  import { resolve } from '$app/paths';
   import '@fontsource-variable/inter';
   import '@fontsource-variable/jetbrains-mono';
   import 'katex/dist/katex.min.css';
@@ -15,6 +16,7 @@
   import IconButton from '$lib/ui/components/IconButton.svelte';
   import AppShell from '$lib/ui/layout/AppShell.svelte';
   import ModuleNav from '$lib/ui/layout/ModuleNav.svelte';
+  import { NAVIGATION } from '$lib/ui/copy/navigation';
   import { provideTheme } from '$lib/ui/theme-context';
   import { page } from '$app/state';
 
@@ -40,18 +42,18 @@
 {:else}
   <AppShell>
     {#snippet sidebar()}
-      <a href="/" class="brand">
-        <span class="logo" aria-hidden="true">f′</span>
-        <span class="brand-name">Math View</span>
+      <a href={resolve('/')} class="brand">
+        <span class="logo" aria-hidden="true">V</span>
+        <span class="brand-name">{NAVIGATION.brand}</span>
       </a>
 
       <ModuleNav />
 
       <footer class="sidebar-footer">
-        <span class="version">v0.3</span>
+        <span class="version">{NAVIGATION.lab}</span>
         <IconButton
           icon={theme.theme === 'dark' ? 'sun' : 'moon'}
-          label={theme.theme === 'dark' ? 'Usar tema claro' : 'Usar tema escuro'}
+          label={theme.theme === 'dark' ? NAVIGATION.lightTheme : NAVIGATION.darkTheme}
           onclick={() => theme.toggle()}
         />
       </footer>
@@ -80,7 +82,7 @@
     font-family: var(--font-mono);
     font-weight: 600;
     font-size: var(--text-sm);
-    color: #fff;
+    color: var(--color-on-accent);
     background: var(--color-accent);
     border-radius: var(--radius-md);
   }

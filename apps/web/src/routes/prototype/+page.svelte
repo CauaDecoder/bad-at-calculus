@@ -51,6 +51,7 @@
       <section>
         <h2>{screen.title}</h2>
         {#each screen.variants as v (v.key)}
+          <!-- eslint-disable-next-line svelte/no-navigation-without-resolve -- prototype: the variant lives in the ?variant= query, which resolve() does not take -->
           <a href={`${screen.href}?variant=${v.key}`} class:chosen={v.key === screen.chosen}
             >{v.key} · {v.label}{v.key === screen.chosen ? ' ✓ escolhida' : ''}</a
           >

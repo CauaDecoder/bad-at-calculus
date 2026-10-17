@@ -4,6 +4,7 @@
   (peak-end rule: celebrate the activation moment instead of only confirming it).
 -->
 <script lang="ts">
+  import { resolve } from '$app/paths';
   import { exercises } from '../mock';
   import { checkAnswer } from '../stub-check';
   import VerifyButton, { type VerifyState } from '../widgets/VerifyButton.svelte';
@@ -60,7 +61,7 @@
 
 <div class="eb">
   <header>
-    <a href="/prototype/inicio?variant=B" class="close" aria-label="Sair">✕</a>
+    <a href={resolve('/prototype/inicio')} class="close" aria-label="Sair">✕</a>
     <div class="progress"><span style:width={`${((index + 1) / queue.length) * 100}%`}></span></div>
     <span class="count">{index + 1}/{queue.length}</span>
   </header>

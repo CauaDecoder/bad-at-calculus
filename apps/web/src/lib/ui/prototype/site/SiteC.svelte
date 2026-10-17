@@ -4,6 +4,7 @@
   (a nod to Arqitel's dot-morphing transition). Text sections carry the argument.
 -->
 <script lang="ts">
+  import { resolve } from '$app/paths';
   import { onMount } from 'svelte';
 
   const N = 48;
@@ -99,7 +100,7 @@
     <span class="brand"><span class="mark"></span>vértice</span>
     <span class="spacer"></span>
     <a href="#github">GitHub</a>
-    <a class="nav-cta" href="/prototype/inicio?variant=C">Começar →</a>
+    <a class="nav-cta" href={resolve('/prototype/inicio')}>Começar →</a>
   </nav>
 
   <div class="story">
@@ -110,7 +111,7 @@
           <h2>{ch.title}</h2>
           <p>{ch.body}</p>
           {#if i === 0}
-            <a class="cta" href="/prototype/exercicio?variant=C">Resolver um exercício</a>
+            <a class="cta" href={resolve('/prototype/exercicio')}>Resolver um exercício</a>
             <span class="trigger">grátis · sem cadastro · offline</span>
           {/if}
         </section>
@@ -139,7 +140,7 @@
 
   <section class="final">
     <h2>Sua próxima prova começa com um gráfico.</h2>
-    <a class="cta" href="/prototype/inicio?variant=C">Abrir a Vértice</a>
+    <a class="cta" href={resolve('/prototype/inicio')}>Abrir a Vértice</a>
     <span class="trigger">open source · MIT · roda no navegador</span>
   </section>
 </div>

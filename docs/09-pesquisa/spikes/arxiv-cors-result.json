@@ -1,0 +1,42 @@
+{
+  "checkedAt": "2026-10-15T13:32:46.993Z",
+  "browser": "151.0.7922.34",
+  "origin": "http://localhost:54948",
+  "endpoint": "https://export.arxiv.org/api/query?id_list=2401.01234&max_results=1",
+  "allowedControl": {
+    "readable": true,
+    "status": 200,
+    "responseType": "cors",
+    "hasAtomEntry": false
+  },
+  "deniedControl": {
+    "readable": false,
+    "error": "TypeError: Failed to fetch"
+  },
+  "arxiv": {
+    "readable": false,
+    "error": "TypeError: Failed to fetch"
+  },
+  "failures": [
+    {
+      "error": "net::ERR_FAILED",
+      "cors": {
+        "corsError": "MissingAllowOriginHeader",
+        "failedParameter": ""
+      }
+    },
+    {
+      "error": "net::ERR_FAILED",
+      "cors": {
+        "corsError": "MissingAllowOriginHeader",
+        "failedParameter": ""
+      }
+    }
+  ],
+  "consoleErrors": [
+    "Access to fetch at 'http://127.0.0.1:54948/denied' from origin 'http://localhost:54948' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+    "Failed to load resource: net::ERR_FAILED",
+    "Access to fetch at 'https://export.arxiv.org/api/query?id_list=2401.01234&max_results=1' from origin 'http://localhost:54948' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.",
+    "Failed to load resource: net::ERR_FAILED"
+  ]
+}
