@@ -1,0 +1,29 @@
+rules:
+  - id: javascript-dynamic-code
+    languages: [typescript, javascript]
+    severity: ERROR
+    message: Não execute texto como código; use parsing explícito e validado.
+    pattern-either:
+      - pattern: eval(...)
+      - pattern: new Function(...)
+    paths:
+      include: [/apps/web/src/**]
+  - id: rust-shell-command
+    languages: [rust]
+    severity: ERROR
+    message: Não invoque um shell no motor ou no desktop; revise a fronteira de execução.
+    pattern-either:
+      - pattern: std::process::Command::new("sh")
+      - pattern: std::process::Command::new("bash")
+      - pattern: std::process::Command::new("cmd")
+      - pattern: std::process::Command::new("powershell")
+  - id: svelte-raw-html
+    languages: [generic]
+    severity: WARNING
+    message: Revise HTML não escapado; saída não confiável exige sanitização.
+    pattern-regex: '\{@html\s+[^}]+\}'
+    paths:
+      include: [/apps/web/src/**/*.svelte]
+      # Reviewed sink: this component renders only KaTeX output, never raw user HTML.
+      # Revisit this exception if its data flow changes; see the F0.6 security report.
+      exclude: [/apps/web/src/lib/ui/components/MathFormula.svelte]
