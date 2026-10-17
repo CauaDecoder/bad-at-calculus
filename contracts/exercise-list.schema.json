@@ -1,0 +1,123 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ExerciseList",
+  "description": "Canonical exercise collection.",
+  "type": "object",
+  "required": [
+    "id",
+    "items",
+    "schemaVersion",
+    "source",
+    "title",
+    "visibility"
+  ],
+  "properties": {
+    "description": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-7[0-9a-fA-F]{3}-[89aAbB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ListItem"
+      }
+    },
+    "schemaVersion": {
+      "type": "integer",
+      "format": "uint32",
+      "maximum": 1.0,
+      "minimum": 1.0
+    },
+    "source": {
+      "$ref": "#/definitions/Source"
+    },
+    "title": {
+      "type": "string"
+    },
+    "visibility": {
+      "$ref": "#/definitions/Visibility"
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "ListItem": {
+      "description": "Ordered reference to an exercise and optionally some of its parts.",
+      "type": "object",
+      "required": [
+        "exercise",
+        "number"
+      ],
+      "properties": {
+        "exercise": {
+          "type": "string"
+        },
+        "number": {
+          "type": "string"
+        },
+        "parts": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Source": {
+      "description": "Content license and attribution metadata.",
+      "type": "object",
+      "required": [
+        "kind",
+        "license"
+      ],
+      "properties": {
+        "authors": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "citation": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "kind": {
+          "$ref": "#/definitions/SourceKind"
+        },
+        "license": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "SourceKind": {
+      "description": "Provenance of the exercise text, not of its references.",
+      "type": "string",
+      "enum": [
+        "authored",
+        "imported",
+        "adapted"
+      ]
+    },
+    "Visibility": {
+      "description": "Publication boundary shared by exercises, lists and packs.",
+      "type": "string",
+      "enum": [
+        "public",
+        "private"
+      ]
+    }
+  }
+}

@@ -1,18 +1,21 @@
 [package]
-name = "math-view-desktop"
-description = "Math View desktop shell (Tauri 2)."
+name = "vertice-desktop"
+description = "Vértice desktop shell (Tauri 2)."
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-rust-version.workspace = true
+rust-version = "1.90"
 
 [build-dependencies]
-tauri-build = { version = "2", features = [] }
+tauri-build = { version = "2.7.3", features = [] }
 
 [dependencies]
-mv-api.workspace = true
+vx-api.workspace = true
 serde_json.workspace = true
-tauri = { version = "2", features = [] }
+tauri = { version = "2.12.4", features = [] }
+
+[dev-dependencies]
+tauri = { version = "2.12.4", features = ["test"] }
 
 [lints]
 workspace = true

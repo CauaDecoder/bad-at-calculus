@@ -1,0 +1,121 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CheckResponse",
+  "type": "object",
+  "required": [
+    "status"
+  ],
+  "properties": {
+    "feedback": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "inputError": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/InputError"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "sampling": {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/SamplingResult"
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "status": {
+      "$ref": "#/definitions/CheckStatus"
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "CheckStatus": {
+      "type": "string",
+      "enum": [
+        "correct",
+        "incorrect",
+        "indeterminate",
+        "invalid_input",
+        "self_graded"
+      ]
+    },
+    "InputError": {
+      "type": "object",
+      "required": [
+        "field",
+        "message"
+      ],
+      "properties": {
+        "field": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "position": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "format": "uint",
+          "minimum": 0.0
+        }
+      },
+      "additionalProperties": false
+    },
+    "SamplingResult": {
+      "type": "object",
+      "required": [
+        "discarded",
+        "domain",
+        "requested",
+        "seed",
+        "valid"
+      ],
+      "properties": {
+        "discarded": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        },
+        "domain": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "maxItems": 2,
+            "minItems": 2
+          }
+        },
+        "requested": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        },
+        "seed": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        },
+        "valid": {
+          "type": "integer",
+          "format": "uint32",
+          "minimum": 0.0
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
