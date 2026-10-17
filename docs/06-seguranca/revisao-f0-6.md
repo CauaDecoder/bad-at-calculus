@@ -104,6 +104,11 @@ for (const depth of [10, 1000, 10000]) {
   Tauri/GTK e teste no Linux, ou análise documentada de alcance com aceite explícito do
   mantenedor. Não forçar override de `glib` incompatível com a major requerida.
 - **Estado:** preexistente; detectado pela primeira rodada de scanners Rust da fundação.
+- **Atualização 2026-10-17:** risco aceito pelo mantenedor até 2027-04-17. Tauri 2.12.4 (última
+  estável) ainda exige gtk-rs 0.18; `glib >=0.20` só chega com Tauri 3, em alpha. Busca no código
+  das dependências do lockfile não encontrou chamada a `VariantStrIter`/`str_iter` fora do próprio
+  `glib`, então a API afetada não é alcançável pelo app. Exceção com motivo e prazo em
+  `osv-scanner.toml`; cargo-deny 0.20.2 não casa este advisory. Revisar ao migrar para Tauri 3.
 
 ### SEC-F0-06 — Informativos/baixo: manutenção e dependência de build
 
@@ -123,6 +128,11 @@ for (const depth of [10, 1000, 10000]) {
   frontend deve planejar migração compatível do Kit ou correção transitiva testada. Registrar
   alcance e aceite formal onde não houver versão corrigida; não ocultar avisos nos scanners.
 - **Estado:** aberto; nenhuma alteração de dependência nesta unidade.
+- **Atualização 2026-10-17:** `cookie` corrigido por override pnpm
+  (`@sveltejs/kit>cookie` → `0.7.2`), porque o Kit 2.70.3, último 2.x, ainda declara `^0.6.0`;
+  remover o override ao migrar para o Kit 3. `paste` e `proc-macro-error` não têm versão
+  corrigida: risco aceito pelo mantenedor até 2027-04-17, com motivo em `deny.toml` e
+  `osv-scanner.toml`. `yoke-derive` yanked continua apenas como aviso.
 
 ## Controles revisados e correções de DevOps
 
@@ -170,6 +180,12 @@ de licenças, não prova de vulnerabilidade ou de incompatibilidade jurídica. O
 revisar as obrigações antes de aprovar exceções específicas. Não foram inseridas exceções apenas
 para tornar o check verde. Cargo-deny relatou ainda `unresolved-workspace-dependency` no Windows;
 esse diagnóstico operacional não foi classificado como vulnerabilidade do produto.
+
+**Atualização 2026-10-17:** o mantenedor aprovou MPL-2.0 apenas para essas cinco crates, por
+exceção nominal em `deny.toml`; MPL-2.0 não entrou na allowlist global, então uma crate MPL nova
+volta a bloquear o check. Todas vêm da cadeia desktop do Tauri e são usadas sem modificação. O
+diagnóstico `unresolved-workspace-dependency` não se repetiu no cargo-deny 0.20.2 local nem no
+runner Linux.
 
 LLM não participa do fluxo atual; OWASP LLM Top 10:2025 é não aplicável à implementação da F0.
 T4/T5 e consentimento para material privado continuam exigências de F2, sem aprovação antecipada.

@@ -64,7 +64,9 @@ scorecard: ossf/scorecard-action (publica no Security tab)
 - `cargo-audit`, `cargo-deny`, OSV, Gitleaks e Semgrep estão fixados por versão. Binários baixados
   diretamente (OSV, Gitleaks e actionlint) exigem SHA-256 literal antes de executar. Essas versões
   e checksums precisam de revisão manual; Renovate está limitado às Actions.
-- `deny.toml` não ignora advisories e confere também dependências desktop. Licenças e fontes
+- `deny.toml` confere também dependências desktop. Só ignora advisories aceitos pelo mantenedor,
+  cada um com motivo; `osv-scanner.toml` repete esses aceites com `ignoreUntil`, para o OSV
+  voltar a falhar quando o prazo vencer. MPL-2.0 é aceita só por exceção nominal. Licenças e fontes
   desconhecidas bloqueiam; duplicatas e versões wildcard geram aviso (as crates locais usam
   `path` sem versão de registry). A allowlist não substitui revisão jurídica.
 - Cargo-deny e OSV, segredos e regras Semgrep bloqueiam seus checks; npm bloqueia alta/crítica.

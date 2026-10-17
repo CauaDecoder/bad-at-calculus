@@ -19,5 +19,10 @@
     "contracts:check": "cargo run -p vx-api --example generate_content_contracts -- --check",
     "lint": "pnpm -C apps/web lint",
     "test": "cargo test --workspace && pnpm -C apps/web test"
+  },
+  "pnpm": {
+    "overrides": {
+      "@sveltejs/kit>cookie": "0.7.2"
+    }
   }
 }

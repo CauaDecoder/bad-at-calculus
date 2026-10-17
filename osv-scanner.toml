@@ -1,0 +1,18 @@
+# Accepted by the maintainer on 2026-10-17 (SEC-F0-05/06 in docs/06-seguranca/revisao-f0-6.md).
+# The two unmaintained crates are also ignored in deny.toml; keep both files in sync.
+# Expired entries fail the scan again.
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0429"
+ignoreUntil = 2027-04-17T00:00:00Z
+reason = "glib 0.18 comes only from the Tauri 2 Linux GTK stack; no crate in the lockfile calls VariantStrIter. Fixed in glib 0.20, which needs Tauri 3."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0436"
+ignoreUntil = 2027-04-17T00:00:00Z
+reason = "paste is unmaintained, not vulnerable; proc-macro pulled by nalgebra/simba."
+
+[[IgnoredVulns]]
+id = "RUSTSEC-2024-0370"
+ignoreUntil = 2027-04-17T00:00:00Z
+reason = "proc-macro-error is unmaintained, not vulnerable; proc-macro pulled by gtk3-macros (Tauri 2 Linux)."
