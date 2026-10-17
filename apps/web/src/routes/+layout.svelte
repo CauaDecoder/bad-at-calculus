@@ -18,8 +18,12 @@
   import ModuleNav from '$lib/ui/layout/ModuleNav.svelte';
   import { NAVIGATION } from '$lib/ui/copy/navigation';
   import { provideTheme } from '$lib/ui/theme-context';
+  import { page } from '$app/state';
 
   let { children }: { children: Snippet } = $props();
+
+  // PROTOTYPE: design prototypes bring their own shell (docs/references/design/README.md).
+  const isPrototype = $derived(page.url.pathname.startsWith('/prototype'));
 
   const theme = new ThemeController(
     new LocalPreferenceStore(),
@@ -33,27 +37,31 @@
   });
 </script>
 
-<AppShell>
-  {#snippet sidebar()}
-    <a href={resolve('/')} class="brand">
-      <span class="logo" aria-hidden="true">V</span>
-      <span class="brand-name">{NAVIGATION.brand}</span>
-    </a>
-
-    <ModuleNav />
-
-    <footer class="sidebar-footer">
-      <span class="version">{NAVIGATION.lab}</span>
-      <IconButton
-        icon={theme.theme === 'dark' ? 'sun' : 'moon'}
-        label={theme.theme === 'dark' ? NAVIGATION.lightTheme : NAVIGATION.darkTheme}
-        onclick={() => theme.toggle()}
-      />
-    </footer>
-  {/snippet}
-
+{#if isPrototype}
   {@render children()}
-</AppShell>
+{:else}
+  <AppShell>
+    {#snippet sidebar()}
+      <a href={resolve('/')} class="brand">
+        <span class="logo" aria-hidden="true">V</span>
+        <span class="brand-name">{NAVIGATION.brand}</span>
+      </a>
+
+      <ModuleNav />
+
+      <footer class="sidebar-footer">
+        <span class="version">{NAVIGATION.lab}</span>
+        <IconButton
+          icon={theme.theme === 'dark' ? 'sun' : 'moon'}
+          label={theme.theme === 'dark' ? NAVIGATION.lightTheme : NAVIGATION.darkTheme}
+          onclick={() => theme.toggle()}
+        />
+      </footer>
+    {/snippet}
+
+    {@render children()}
+  </AppShell>
+{/if}
 
 <style>
   .brand {

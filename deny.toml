@@ -1,6 +1,13 @@
 # Check every platform in the lockfile, including desktop dependencies.
 [advisories]
-ignore = []
+# Each exception was accepted by the maintainer on 2026-10-17 (SEC-F0-05/06 in
+# docs/06-seguranca/revisao-f0-6.md). Mirror changes in osv-scanner.toml and
+# review them again by 2027-04-17 or when Tauri/nalgebra release a fix.
+# The glib advisory (RUSTSEC-2024-0429) is not matched by cargo-deny, only by OSV.
+ignore = [
+    { id = "RUSTSEC-2024-0436", reason = "paste is unmaintained, not vulnerable; it is a proc-macro pulled by nalgebra/simba with no maintained replacement upstream." },
+    { id = "RUSTSEC-2024-0370", reason = "proc-macro-error is unmaintained, not vulnerable; it is a proc-macro pulled by gtk3-macros in the Tauri 2 Linux stack." },
+]
 
 [licenses]
 allow = [
@@ -15,6 +22,15 @@ allow = [
     "CC0-1.0",
 ]
 confidence-threshold = 0.8
+# MPL-2.0 is accepted per crate, not globally, so a new MPL dependency still needs review.
+# These come from the Tauri desktop stack and are used unmodified.
+exceptions = [
+    { crate = "cssparser", allow = ["MPL-2.0"] },
+    { crate = "cssparser-macros", allow = ["MPL-2.0"] },
+    { crate = "dtoa-short", allow = ["MPL-2.0"] },
+    { crate = "option-ext", allow = ["MPL-2.0"] },
+    { crate = "selectors", allow = ["MPL-2.0"] },
+]
 
 [bans]
 multiple-versions = "warn"
