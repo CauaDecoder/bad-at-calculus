@@ -20,9 +20,9 @@ Leia nesta ordem quando precisar de contexto:
 3. [arquitetura](docs/03-arquitetura/visao-geral.md)
 4. o ADR do assunto em [docs/03-arquitetura/adr/](docs/03-arquitetura/adr/)
 
-> Em transição: crates e pacotes ainda usam `mv-*` / `@math-view/*`. O renome para `vx-*` /
-> `@vertice/*` é da Fase 0 ([ADR 0006](docs/03-arquitetura/adr/0006-plataforma-vertice.md)).
-> Não renomeie nada fora do PR de renome.
+> O renome técnico local da F0.2 usa `vx-*` / `@vertice/*`
+> ([ADR 0006](docs/03-arquitetura/adr/0006-plataforma-vertice.md)). Os ADRs históricos mantêm
+> os nomes antigos. Publicação externa e renome do repositório exigem confirmação do mantenedor.
 
 ## Estilo de resposta: caveman (padrão, sempre)
 
@@ -42,16 +42,23 @@ primeira resposta da sessão, sem esperar `/caveman`. Sem a skill, siga as regra
   conteúdo de exercícios seguem escritos normalmente, conforme as regras deste arquivo.
 - Desliga só quando o usuário pedir ("stop caveman" / "normal mode").
 
+## Implementação por fases
+
+Para implementar uma fase ou unidade do roadmap, comece pelo
+[índice de implementação](docs/05-engenharia/implementacao/README.md) e siga o guia da unidade.
+Antes de editar UI, leia o [design aprovado](docs/05-engenharia/implementacao/design-aprovado.md).
+Os guias definem dependências, critérios de conclusão e limites por sessão.
+
 ## Mapa do repositório
 
 | Caminho                        | Camada               | Pode depender de                               |
 | ------------------------------ | -------------------- | ---------------------------------------------- |
-| `crates/mv-domain`             | Domain (entities)    | `std` + bibliotecas numéricas puras (`nalgebra`, ADR 0004) |
-| `crates/mv-application`        | Application          | `mv-domain`                                    |
-| `crates/mv-infra`              | Interface adapters   | `mv-application`, `mv-domain`                  |
-| `crates/mv-api`                | Interface adapters   | `mv-infra`, `mv-application`, `mv-domain`, `serde` |
-| `crates/mv-wasm`               | Frameworks & drivers | `mv-api` (uma função: `dispatch`)              |
-| `apps/desktop/src-tauri`       | Frameworks & drivers | `mv-api` (um comando: `engine`)                |
+| `crates/vx-domain`             | Domain (entities)    | `std` + bibliotecas numéricas puras (`nalgebra`, ADR 0004) |
+| `crates/vx-application`        | Application          | `vx-domain`                                    |
+| `crates/vx-infra`              | Interface adapters   | `vx-application`, `vx-domain`                  |
+| `crates/vx-api`                | Interface adapters   | `vx-infra`, `vx-application`, `vx-domain`, `serde` |
+| `crates/vx-wasm`               | Frameworks & drivers | `vx-api` (uma função: `dispatch`)              |
+| `apps/desktop/src-tauri`       | Frameworks & drivers | `vx-api` (um comando: `engine`)                |
 | `apps/web/src/lib/domain`      | Front: domain        | nada                                           |
 | `apps/web/src/lib/ports`       | Front: ports         | `domain`                                       |
 | `apps/web/src/lib/application` | Front: application   | `domain`, `ports`                              |
@@ -62,8 +69,8 @@ primeira resposta da sessão, sem esperar `/caveman`. Sem a skill, siga as regra
 | `content-private/`             | **Fora do git**      | material de terceiros; nunca ler para publicar, nunca commitar |
 | `docs/`                        | Documentação PT-BR   | —                                              |
 
-**Regra de ouro:** dependências apontam para dentro. Nunca importe `mv-infra` a partir de
-`mv-application`, nem `@tauri-apps/*` ou `$lib/adapters` a partir de `lib/ui` ou
+**Regra de ouro:** dependências apontam para dentro. Nunca importe `vx-infra` a partir de
+`vx-application`, nem `@tauri-apps/*` ou `$lib/adapters` a partir de `lib/ui` ou
 `lib/application` (o ESLint bloqueia).
 
 **Contextos novos** (`assessment`, `content`, `review`, `progress`) são **módulos dentro das camadas
@@ -72,10 +79,10 @@ existentes**, não crates novas, e um contexto não importa internos de outro
 
 ## Como adicionar uma operação ao motor (receita)
 
-1. **Domínio** (`mv-domain/src/<assunto>/`): a regra matemática + testes.
-2. **Aplicação** (`mv-application/src/use_cases/<assunto>/`): caso de uso `VerboSubstantivo`
+1. **Domínio** (`vx-domain/src/<assunto>/`): a regra matemática + testes.
+2. **Aplicação** (`vx-application/src/use_cases/<assunto>/`): caso de uso `VerboSubstantivo`
    com `Request`/`Report` + teste com fakes (`use_cases/test_support.rs`).
-3. **API** (`mv-api/src/<assunto>.rs`): DTOs + handler; registre o comando em `commands` e em
+3. **API** (`vx-api/src/<assunto>.rs`): DTOs + handler; registre o comando em `commands` e em
    `dispatch`; teste o JSON de resposta.
 4. **Front**: tipo em `lib/domain/<assunto>.ts`, método no port (`lib/ports/*-engine.ts`) e no
    adapter (`lib/adapters/engine/*-adapter.ts`), nome em `adapters/engine/commands.ts`.
@@ -104,8 +111,8 @@ existentes**, não crates novas, e um contexto não importa internos de outro
 
 ```bash
 cargo fmt --all
-cargo clippy --workspace --exclude math-view-desktop --all-targets -- -D warnings
-cargo test --workspace --exclude math-view-desktop
+cargo clippy --workspace --exclude vertice-desktop --all-targets -- -D warnings
+cargo test --workspace --exclude vertice-desktop
 pnpm wasm:build
 pnpm -C apps/web check
 pnpm -C apps/web lint

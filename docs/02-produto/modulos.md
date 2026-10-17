@@ -1,8 +1,10 @@
 # Módulos
 
 A Vértice é organizada em **módulos de produto** (áreas da navegação) e em **disciplinas** (o
-conteúdo). O Laboratório e os Exercícios são transversais a todas as disciplinas: uma disciplina
-nova ganha visualizações no Laboratório e exercícios no banco.
+conteúdo). O Laboratório, os Exercícios e a Biblioteca são transversais a todas as disciplinas: uma
+disciplina nova ganha visualizações no Laboratório, exercícios no banco e material (notas,
+roteiros, fontes abertas) na Biblioteca. O ciclo é **estudar → ver → praticar → revisar**, e a
+ligação entre os módulos é a [taxonomia](taxonomia.md) de habilidades.
 
 Legenda: ✅ pronto · 🟡 parcial · 🔜 planejado (fase do [roadmap](roadmap.md) entre parênteses)
 
@@ -10,29 +12,30 @@ Legenda: ✅ pronto · 🟡 parcial · 🔜 planejado (fase do [roadmap](roadmap
 
 | Módulo | Rota base | O que faz | Status |
 | ------ | --------- | --------- | ------ |
-| **Laboratório** | `/lab` | Visualizações interativas por disciplina (o antigo Math View) | ✅ Cálculo e VGA · 🔜 rotas em `/lab` (F0) |
+| **Laboratório** | `/lab` | Visualizações interativas por disciplina (o antigo Math View) | ✅ Cálculo e VGA; rotas e redirecionamentos estáticos em `/lab` (F0.4) |
 | **Exercícios** | `/exercicios`, `/listas` | Banco, listas, resolver com correção automática, dicas, solução em passos, "Abrir no laboratório" | 🔜 (F1) — [PRD](prd-exercicios.md) |
+| **Biblioteca** | `/biblioteca` | Material de estudo: papers e vídeos (link + metadados), livros abertos, notas de aula, arquivos próprios (privados, só no dispositivo), **roteiros de leitura**; leitor de PDF com destaques que viram cartões de revisão; selo de confiança, licença e status (ativo, corrigido, retirado) por item; tudo ligado a habilidades | 🔜 referências nos exercícios (F1) · biblioteca local (F2) · nuvem privada (F3) · compartilhar conteúdo autoral (F4) — [PRD](prd-biblioteca.md) |
 | **Autoria** | `/autoria` | Criar/editar exercício com preview; importar em lote (pack, CSV, gabarito separado); importar PDF com IA | 🔜 editor e pack (F1) · PDF com IA (F2) |
-| **Revisão** | `/revisao` | Repetição espaçada (FSRS) dos itens errados ou marcados; **caderno de erros** | 🔜 (F2) |
+| **Revisão** | `/revisao` | Repetição espaçada (FSRS) dos itens errados ou marcados, e dos **destaques da Biblioteca** que viram cartão; **caderno de erros** | 🔜 (F2) |
 | **Plano de estudos** | `/plano` | Plano com data de prova, checklist por dia e simulados (inspirado no fluxo real de estudo de POO) | 🔜 (F2) |
 | **Progresso** | `/progresso` | Domínio por habilidade, histórico, sequência de estudos | 🔜 local (F2) |
-| **Conta e comunidade** | `/conta`, `/grupos` | Login, sync, listas compartilhadas, turmas, publicação de packs | 🔜 (F3–F4) |
+| **Conta e comunidade** | `/conta`, `/grupos` | Login, sync, listas compartilhadas, turmas, publicação de packs e de material **autoral** (com denúncia e moderação) | 🔜 (F3–F4) |
 
 Taxonomia de disciplinas, tópicos e habilidades: [taxonomia.md](taxonomia.md).
 
 ## Laboratório — o que já existe
 
-Cada tópico é uma fatia vertical: regras em `mv-domain/src/<assunto>`, casos de uso em
-`mv-application/src/use_cases`, comando em `mv-api`, estado em `apps/web/src/lib/application` e
+Cada tópico é uma fatia vertical: regras em `vx-domain/src/<assunto>`, casos de uso em
+`vx-application/src/use_cases`, comando em `vx-api`, estado em `apps/web/src/lib/application` e
 telas em `apps/web/src/lib/ui/<assunto>`.
 
 ### Cálculo
 
 | Tópico | Rota atual | O que tem |
 | ------ | ---------- | --------- |
-| ✅ Limites e continuidade | `/calculo/limites` | Limites laterais e no infinito, tabela de aproximação, bolinhas abertas/fechadas, três condições de continuidade, tipo de descontinuidade |
-| ✅ Derivadas | `/calculo/derivadas` | Tangente arrastável, `f'(x₀)`, traçado de `f'`, derivada simbólica com cada regra, `f''`, pontos críticos |
-| ✅ Integrais | `/calculo/integrais` | Área com sinal, somas de Riemann, primitiva e TFC |
+| ✅ Limites e continuidade | `/lab/calculo/limites` | Limites laterais e no infinito, tabela de aproximação, bolinhas abertas/fechadas, três condições de continuidade, tipo de descontinuidade |
+| ✅ Derivadas | `/lab/calculo/derivadas` | Tangente arrastável, `f'(x₀)`, traçado de `f'`, derivada simbólica com cada regra, `f''`, pontos críticos |
+| ✅ Integrais | `/lab/calculo/integrais` | Área com sinal, somas de Riemann, primitiva e TFC |
 | 🔜 Funções | — | Domínio, composição, inversa (Lista 01) |
 | 🔜 Técnicas de integração | — | Substituição e partes com passos |
 
@@ -42,15 +45,17 @@ Todas as páginas aceitam funções por partes: `{x < 1: x^2; x >= 1: 2x}`.
 
 | Tópico | Rota atual | O que tem |
 | ------ | ---------- | --------- |
-| ✅ Operações com vetores | `/vetores/operacoes` | Vista 3D; escalar, vetorial, normas, ângulo, projeção, produto misto |
-| ✅ Retas e planos | `/vetores/retas-e-planos` | Plano por 3 pontos, reta paramétrica, distâncias |
-| ✅ Matrizes | `/vetores/matrizes` | Determinante, inversa, posto, escalonamento, autovalores |
-| ✅ Sistemas lineares | `/vetores/sistemas` | Gauss–Jordan passo a passo, SPD/SPI/SI |
+| ✅ Operações com vetores | `/lab/vetores/operacoes` | Vista 3D; escalar, vetorial, normas, ângulo, projeção, produto misto |
+| ✅ Retas e planos | `/lab/vetores/retas-e-planos` | Plano por 3 pontos, reta paramétrica, distâncias |
+| ✅ Matrizes | `/lab/vetores/matrizes` | Determinante, inversa, posto, escalonamento, autovalores |
+| ✅ Sistemas lineares | `/lab/vetores/sistemas` | Gauss–Jordan passo a passo, SPD/SPI/SI |
 | 🔜 Cônicas e quádricas | — | Identificação, elementos e gráfico |
 | 🔜 Transformações lineares | — | Mudança de base, efeito no plano |
 
-Na Fase 0 as rotas passam para `/lab/calculo/...` e `/lab/vetores/...`, com redirecionamento das
-antigas ([ADR 0006](../03-arquitetura/adr/0006-plataforma-vertice.md)).
+Desde a F0.4, as URLs antigas `/calculo/...` e `/vetores/...` redirecionam no build estático,
+preservando parâmetros e fragmentos ([ADR 0006](../03-arquitetura/adr/0006-plataforma-vertice.md)).
+O [relatório da navegação](../05-engenharia/implementacao/f0-4-navegacao.md) registra os testes
+e a falha 3D preexistente, que permanece fora do escopo dessa mudança.
 
 ## Disciplinas planejadas (Laboratório + Exercícios)
 

@@ -6,9 +6,10 @@
 - [Visão do produto](01-visao/visao-do-produto.md) — problema, público, princípios e não-objetivos.
 
 ## 02 · Produto
-- [Módulos](02-produto/modulos.md) — Laboratório, Exercícios, Autoria, Revisão, Plano, Progresso; disciplinas por curso.
+- [Módulos](02-produto/modulos.md) — Laboratório, Exercícios, Biblioteca, Autoria, Revisão, Plano, Progresso; disciplinas por curso.
 - [Roadmap](02-produto/roadmap.md) — fases F0–F4 e histórico do Math View.
 - [PRD — Exercícios, Autoria e Importação](02-produto/prd-exercicios.md) — histórias, critérios de aceite, escopo da F1.
+- [PRD — Biblioteca (material de estudo)](02-produto/prd-biblioteca.md) — papers, livros abertos, roteiros de leitura, leitor com destaques, licença e comunidade por fases.
 - [Formato de exercícios](02-produto/formato-de-exercicios.md) — exercício, partes, tipos de resposta, listas, packs.
 - [Taxonomia](02-produto/taxonomia.md) — área → disciplina → tópico → habilidade.
 - [Casos de uso — Cálculo A](02-produto/casos-de-uso-calculo-a.md) — listas reais mapeadas em funcionalidades.
@@ -19,7 +20,10 @@
 - [Modelo de dados](03-arquitetura/modelo-de-dados.md) — entidades, onde cada dado mora, schema relacional.
 - [Frontend](03-arquitetura/frontend.md) — Svelte, ports do motor, estado, gráficos 2D/3D e resultados exatos.
 - [Motor matemático](03-arquitetura/motor-matematico.md) — parser, derivação com passos, limites, integrais, vetores, matrizes.
-- [ADRs](03-arquitetura/adr/) — registro de decisões arquiteturais (0001–0013).
+- [ADRs](03-arquitetura/adr/) — registro de decisões arquiteturais (0001–0016).
+  - [ADR 0014 — Biblioteca: contexto `library`, material de estudo e roteiros](03-arquitetura/adr/0014-biblioteca.md) (aceito)
+  - [ADR 0015 — Evidência de verificação das respostas esperadas](03-arquitetura/adr/0015-evidencia-de-verificacao.md) (aceito)
+  - [ADR 0016 — Fronteiras e contrato mínimo de conteúdo na F1](03-arquitetura/adr/0016-contrato-de-conteudo-f1.md) (aceito)
 
 ## 04 · Design
 - [Princípios de UX](04-design/principios-ux.md)
@@ -30,6 +34,8 @@
 - [Referências visuais](04-design/referencias.md)
 
 ## 05 · Engenharia
+- [Implementação por fases](05-engenharia/implementacao/README.md) — entrada para agentes de terminal, unidades F0–F4, dependências e critérios de conclusão.
+- [Design aprovado para implementação](05-engenharia/implementacao/design-aprovado.md) — Início A, Exercício D, Site D e comparação visual.
 - [Clean Code](05-engenharia/clean-code.md) — regras com exemplos em Rust e TypeScript.
 - [Convenções](05-engenharia/convencoes.md) — nomes, pastas, erros, commits.
 - [Testes](05-engenharia/testes.md)
@@ -49,6 +55,8 @@
 
 ## 09 · Pesquisa
 - [Plataformas e tecnologias de referência](09-pesquisa/plataformas-de-referencia.md) — o que aproveitamos de cada uma, com fontes.
+- [OpenAI Math e a Vértice](09-pesquisa/openai-math.md) — contribuições possíveis para estudo, verificação matemática e avaliação de IA.
+- [Spike de CORS da API do arXiv](09-pesquisa/spike-arxiv-cors.md) — teste no navegador e preenchimento manual na web.
 
 ## Material de apoio
 - `content-private/` (fora do git) — listas, apostilas e slides de terceiros usados como casos

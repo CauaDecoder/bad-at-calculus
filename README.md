@@ -1,16 +1,17 @@
 # Vértice
 
-> Plataforma de estudos open source para exatas, computação e arquitetura: **ver** o conceito
-> acontecendo, **praticar** com correção imediata e **revisar** no momento certo.
+> Plataforma de estudos open source para exatas, computação e arquitetura: **estudar** com
+> material de procedência clara, **ver** o conceito acontecendo, **praticar** com correção
+> imediata e **revisar** no momento certo.
 
 A Vértice nasceu como **Math View**, um laboratório visual de Cálculo e Vetores, que hoje é o
 módulo **Laboratório**. O núcleo é escrito em **Rust** (motor matemático e correção de
 exercícios) e a interface em **Svelte + TypeScript**. Roda no navegador (**WebAssembly**), no
 desktop (**Tauri**) e, no futuro, num servidor **Axum**.
 
-> 🚧 O repositório está em transição de *Math View* para *Vértice*. Crates e pacotes ainda usam o
-> prefixo `mv-`; o renome é a Fase 0 do [roadmap](docs/02-produto/roadmap.md)
-> ([ADR 0006](docs/03-arquitetura/adr/0006-plataforma-vertice.md)).
+> O renome técnico local usa crates `vx-*` e pacotes `@vertice/*`
+> ([ADR 0006](docs/03-arquitetura/adr/0006-plataforma-vertice.md)). O renome do repositório no
+> GitHub e a confirmação da identidade para publicação externa continuam separados.
 
 ## Módulos
 
@@ -18,6 +19,7 @@ desktop (**Tauri**) e, no futuro, num servidor **Axum**.
 | ------ | --------- | ------ |
 | **Laboratório** | Visualizações interativas: limites, derivadas, integrais, vetores 3D, retas e planos, matrizes, sistemas | ✅ |
 | **Exercícios** | Listas com correção automática de expressões, equações, conjuntos e mais; dicas; "Abrir no laboratório" | 🔜 F1 |
+| **Biblioteca** | Material de estudo: papers, livros abertos, notas de aula e arquivos próprios; leitor de PDF com destaques que viram cartões; roteiros de leitura; licença, selo de confiança e status por item | 🔜 F1 (referências) · F2 (local) · F3–F4 |
 | **Autoria** | Criar exercícios, importar em lote com gabarito, importar PDF com IA | 🔜 F1–F2 |
 | **Revisão e Plano de estudos** | Repetição espaçada (FSRS), caderno de erros, plano até a prova | 🔜 F2 |
 | **Contas e comunidade** | Sync, listas compartilhadas, turmas | 🔜 F3–F4 |
@@ -40,11 +42,11 @@ Resultados em forma exata (`√6/9`, `π/3`, `8/3`).
 
 ```
 crates/        núcleo Rust (Clean Architecture)
-  mv-domain/        regras: expressões, cálculo, vetores, geometria, álgebra linear (+ correção, F1)
-  mv-application/   casos de uso + ports (traits)
-  mv-infra/         adaptadores: parser, persistência
-  mv-api/           contrato: comandos, DTOs JSON, erros estruturados
-  mv-wasm/          ponte WebAssembly (uma função: dispatch)
+  vx-domain/        regras: expressões, cálculo, vetores, geometria, álgebra linear (+ correção, F1)
+  vx-application/   casos de uso + ports (traits)
+  vx-infra/         adaptadores: parser, persistência
+  vx-api/           contrato: comandos, DTOs JSON, erros estruturados
+  vx-wasm/          ponte WebAssembly (uma função: dispatch)
 apps/
   web/              interface SvelteKit + TypeScript
   desktop/          empacotamento desktop com Tauri 2
@@ -62,13 +64,16 @@ pnpm install
 pnpm wasm:build   # compila o motor Rust para WebAssembly
 pnpm dev          # interface web em http://localhost:5173
 pnpm desktop:dev  # app desktop (Tauri)
-cargo test --workspace --exclude math-view-desktop
+cargo test --workspace --exclude vertice-desktop
 ```
 
 ## Documentação
 
-Comece pelo [índice](docs/README.md): visão, PRD de exercícios, arquitetura (C4 + ADRs), segurança
+Comece pelo [índice](docs/README.md): visão, PRDs de exercícios e da Biblioteca, arquitetura (C4 + ADRs), segurança
 (OWASP), DevOps, IA e a pesquisa de referências.
+
+Para implementar com agentes de terminal, use os [guias por fase](docs/05-engenharia/implementacao/README.md).
+Cada unidade pode ser solicitada indicando apenas seu ID e arquivo.
 
 ## Contribuindo
 

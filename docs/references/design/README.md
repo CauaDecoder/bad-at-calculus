@@ -1,12 +1,14 @@
 # Direção de design — Vértice
 
-- **Status:** exploração. Protótipos navegáveis em `/prototype` (ver [Protótipos](#6-protótipos)).
+- **Status:** direção aprovada no [ADR 0013](../../03-arquitetura/adr/0013-direcao-de-design.md).
+  A fonte navegável do protótipo precisa ser recuperada (ver [Protótipos](#6-protótipos)).
 - **Data:** 2026-10-14
 - **Objetivo:** definir o visual principal da plataforma (app e site) antes das fases de código,
   a partir das referências do mantenedor e da skill *revenue-centric-design* (RCD).
 
-Depois da escolha, os tokens vencedores entram em
-[`docs/04-design/design-system.md`](../../04-design/design-system.md) e em `apps/web/src/styles/tokens.css`.
+A implementação segue o [design system](../../04-design/design-system.md) e os tokens de
+`apps/web/src/styles/tokens.css`. O [guia para agentes](../../05-engenharia/implementacao/design-aprovado.md)
+define como conferir as variantes aprovadas e registrar a comparação visual.
 
 ---
 
@@ -112,10 +114,14 @@ e expressões); a B testa um serifado de títulos.
 
 ## 6. Protótipos
 
-Código descartável guardado no branch **`prototype/vertice-design`** (fora do `main`), em
-`apps/web/src/routes/prototype/` e `apps/web/src/lib/ui/prototype/`. Para ver: `git switch
-prototype/vertice-design`, rode `pnpm dev` e abra `http://localhost:5173/prototype`. Troque de variante com a barra inferior ou
-`←` / `→`. A barra só existe em modo de desenvolvimento.
+O ADR 0013 registra a fonte descartável no branch **`prototype/vertice-design`**, fora do `main`,
+em `apps/web/src/routes/prototype/` e `apps/web/src/lib/ui/prototype/`. Na consulta ao remoto em
+2026-10-15, esse branch não estava publicado. Recupere a fonte no computador de origem conforme
+o [guia de design](../../05-engenharia/implementacao/design-aprovado.md#recuperar-a-fonte-do-protótipo).
+
+Depois da recuperação, abra a referência em checkout separado, rode `pnpm dev` e acesse
+`http://localhost:5173/prototype`. Troque de variante com a barra inferior ou `←` / `→`.
+A barra só existe em modo de desenvolvimento. Não troque de branch descartando alterações locais.
 
 | Tela | Rota | A | B | C |
 | ---- | ---- | - | - | - |
@@ -145,6 +151,6 @@ mantenedor preferiu manter o layout da A e levar só a ideia de movimento.
 
 ## 7. Próximos passos
 1. ~~Escolher (ou misturar) as variantes por tela e a direção visual.~~ Feito (acima).
-2. Registrar a decisão num ADR de design e atualizar `design-system.md` + `tokens.css`.
+2. ~~Registrar a decisão num ADR de design e atualizar `design-system.md` + `tokens.css`.~~ Feito: ADR 0013.
 3. ~~Guardar os protótipos num branch descartável e removê-los do `main`.~~ Feito: `prototype/vertice-design`.
 4. Teste de 5 segundos do herói do site com 3–5 colegas de cada curso (exatas, ADS, AU).

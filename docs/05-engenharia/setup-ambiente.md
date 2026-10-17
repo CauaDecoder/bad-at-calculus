@@ -6,11 +6,11 @@ Guia para Windows (funciona de forma análoga em macOS/Linux).
 
 | Ferramenta | Versão   | Instalação (Windows)                                          |
 | ---------- | -------- | ------------------------------------------------------------- |
-| Rust       | ≥ 1.80   | `winget install Rustlang.Rustup` e depois `rustup default stable` |
+| Rust       | ≥ 1.85 (motor); ≥ 1.90 (desktop) | `winget install Rustlang.Rustup` e depois `rustup default stable` |
 | Alvo WASM  | —        | `rustup target add wasm32-unknown-unknown`                    |
 | wasm-pack  | ≥ 0.13   | `cargo install wasm-pack`                                     |
-| Node.js    | ≥ 20 LTS | `winget install OpenJS.NodeJS.LTS`                            |
-| pnpm       | ≥ 9      | `npm install -g pnpm@9` (ou `corepack enable` em terminal de administrador) |
+| Node.js    | 22.12+ (22.x), 24.x LTS ou ≥ 26 | `winget install OpenJS.NodeJS.LTS`             |
+| pnpm       | 9.12.0   | `corepack pnpm` usa a versão fixada em `packageManager` (ou `npm install -g pnpm@9.12.0`) |
 | Tauri      | 2.x      | Pré-requisitos: [Microsoft C++ Build Tools](https://visualstudio.microsoft.com/visual-cpp-build-tools/) (“Desktop development with C++”) e WebView2 (já incluso no Windows 11) |
 
 Guia oficial do Tauri: <https://v2.tauri.app/start/prerequisites/>.
@@ -18,8 +18,8 @@ Guia oficial do Tauri: <https://v2.tauri.app/start/prerequisites/>.
 ## 2. Primeira execução
 
 ```bash
-pnpm install            # dependências do front e do Tauri CLI
-pnpm wasm:build         # compila crates/mv-wasm para apps/web/src/lib/wasm/pkg
+pnpm install --frozen-lockfile --strict-peer-dependencies # dependências do front e do Tauri CLI
+pnpm wasm:build         # compila crates/vx-wasm para apps/web/src/lib/wasm/pkg
 pnpm dev                # interface web em http://localhost:5173
 ```
 
@@ -34,7 +34,7 @@ pnpm desktop:dev
 ```bash
 cargo fmt --all
 cargo clippy --workspace --all-targets -- -D warnings
-cargo test --workspace --exclude math-view-desktop
+cargo test --workspace --exclude vertice-desktop
 pnpm check
 pnpm lint
 pnpm -C apps/web test

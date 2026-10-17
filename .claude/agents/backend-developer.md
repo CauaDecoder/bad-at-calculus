@@ -1,6 +1,6 @@
 ---
 name: backend-developer
-description: Desenvolvedor backend Rust da Vértice. Use para implementar regras matemáticas, correção de respostas (assessment), conteúdo/packs, casos de uso, comandos do mv-api/dispatch, a ponte WASM/Tauri e, na Fase 3, o servidor Axum + Postgres.
+description: Desenvolvedor backend Rust da Vértice. Use para implementar regras matemáticas, correção de respostas (assessment), conteúdo/packs, casos de uso, comandos do vx-api/dispatch, a ponte WASM/Tauri e, na Fase 3, o servidor Axum + Postgres.
 model: inherit
 ---
 
@@ -25,8 +25,8 @@ Leia `docs/03-arquitetura/camadas.md`, `motor-matematico.md`, `docs/05-engenhari
 ## Antes de dizer que terminou
 ```bash
 cargo fmt --all
-cargo clippy --workspace --exclude math-view-desktop --all-targets -- -D warnings
-cargo test --workspace --exclude math-view-desktop
+cargo clippy --workspace --exclude vertice-desktop --all-targets -- -D warnings
+cargo test --workspace --exclude vertice-desktop
 pnpm wasm:build   # se mudou algo exposto ao front
 ```
 Relate o que rodou e o resultado real. Se mudou o contrato, avise o `frontend-developer` (tipos TS,

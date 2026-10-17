@@ -89,9 +89,11 @@ Conteúdo do app: até 1120px; página com 32–40px de margem lateral (16px no 
   (command palette, modais), `--shadow-xl` (demo do herói do site), `--shadow-accent` (CTA do site).
 
 ## Layout do app
-- **Sidebar** de `--layout-sidebar-width` (248px): marca, busca (`Ctrl K`), grupos "Estudar"
-  (Início, Laboratório, Exercícios, Revisão com contador, Plano de estudos) e "Biblioteca" (Minhas
-  listas, Importar lista); usuário no rodapé. Some abaixo de 900px.
+- **Sidebar** de `--layout-sidebar-width` (248px): marca, busca (`Ctrl K`), grupo "Estudar"
+  (Início, Laboratório, Exercícios, Revisão com contador, Plano de estudos). "Minhas listas" e
+  "Importar lista" ficam sob Exercícios. "Biblioteca" identifica o módulo de material de estudo
+  (`/biblioteca`, F2, [ADR 0014](../03-arquitetura/adr/0014-biblioteca.md)); usuário no rodapé.
+  Some abaixo de 900px.
 - **Início:** título + frase de direção; **uma tarefa principal** com barra de progresso e um
   único botão índigo; lista "Para hoje" (ícone, título, motivo, prazo, ação); coluna direita com
   a prova e os primeiros passos.

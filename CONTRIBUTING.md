@@ -51,9 +51,9 @@ Escopos de commit para conteúdo: `content`, `taxonomy`.
 - [ ] Nomes descritivos, funções pequenas que fazem uma coisa ([clean-code.md](docs/05-engenharia/clean-code.md)).
 - [ ] Sem `unwrap()`/`expect()` em código de biblioteca; erros tipados com `Result`.
 - [ ] Testes para toda regra nova no domínio e nos casos de uso ([testes.md](docs/05-engenharia/testes.md)).
-- [ ] `cargo fmt`, `cargo clippy -- -D warnings`, `cargo test --workspace --exclude math-view-desktop` passando.
+- [ ] `cargo fmt`, `cargo clippy -- -D warnings`, `cargo test --workspace --exclude vertice-desktop` passando.
 - [ ] `pnpm lint`, `pnpm check` e `pnpm -C apps/web test` passando (se mexeu no front).
-- [ ] Operação nova no motor? Comando registrado em `mv-api` **e** em `adapters/engine/commands.ts`
+- [ ] Operação nova no motor? Comando registrado em `vx-api` **e** em `adapters/engine/commands.ts`
       (receita em [AGENTS.md](AGENTS.md)).
 - [ ] Documentação atualizada se mudou comportamento, arquitetura ou design.
 - [ ] Decisão arquitetural relevante? Registre um [ADR](docs/03-arquitetura/adr/template.md).

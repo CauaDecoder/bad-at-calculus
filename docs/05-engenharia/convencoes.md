@@ -16,7 +16,7 @@
 - Ports: substantivo do papel (`ExpressionParser`, `WorkspaceRepository`).
   Adapters: tecnologia + papel (`PrattParser`, `JsonFileWorkspaceRepository`).
 - Erros: um enum por camada (`DomainError`, `ApplicationError`), com `thiserror` fora do domínio.
-- DTOs (`*Dto`) existem só nas camadas de entrega (`mv-wasm`, `src-tauri`).
+- DTOs (`*Dto`) existem só nas camadas de entrega (`vx-wasm`, `src-tauri`).
 - `pub` só no que precisa ser público; reexporte a API da crate em `lib.rs`.
 
 ## TypeScript / Svelte
@@ -28,10 +28,10 @@
 
 ## Estrutura de pastas (resumo)
 ```
-crates/mv-domain/src/<assunto>.rs           entidades por assunto
-crates/mv-application/src/ports/<port>.rs   um trait por arquivo
-crates/mv-application/src/use_cases/<caso>.rs
-crates/mv-infra/src/<adapter>/mod.rs
+crates/vx-domain/src/<assunto>.rs           entidades por assunto
+crates/vx-application/src/ports/<port>.rs   um trait por arquivo
+crates/vx-application/src/use_cases/<caso>.rs
+crates/vx-infra/src/<adapter>/mod.rs
 apps/web/src/lib/{domain,ports,adapters,application,ui}
 ```
 
