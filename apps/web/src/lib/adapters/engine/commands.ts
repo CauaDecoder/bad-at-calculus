@@ -1,5 +1,6 @@
-/** Engine command names — keep in sync with `crates/mv-api/src/lib.rs` (`commands`). */
+/** Engine command names — keep in sync with `crates/vx-api/src/lib.rs` (`commands`). */
 export const Commands = {
+  assessmentCheck: 'assessment.check',
   expressionLatex: 'expression.latex',
   calculusSample: 'calculus.sample',
   calculusTangent: 'calculus.tangent',

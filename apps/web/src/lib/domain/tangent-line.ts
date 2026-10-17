@@ -1,6 +1,6 @@
 /**
  * Front-end domain types. Plain data + pure functions, no framework imports.
- * Mirrors `mv_domain::calculus::TangentLine` (see crates/mv-domain).
+ * Mirrors `vx_domain::calculus::TangentLine` (see crates/vx-domain).
  */
 import { formatNumberLatex } from './format-number';
 

@@ -2,6 +2,7 @@
 <script lang="ts">
   import type { Snippet } from 'svelte';
   import PageHeader from './PageHeader.svelte';
+  import { NAVIGATION } from '$lib/ui/copy/navigation';
 
   interface Props {
     module: string;
@@ -14,7 +15,7 @@
 </script>
 
 <svelte:head>
-  <title>{title} · Math View</title>
+  <title>{title} · {NAVIGATION.lab} · {NAVIGATION.brand}</title>
 </svelte:head>
 
 <div class="topic-page">

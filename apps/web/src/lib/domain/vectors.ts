@@ -1,6 +1,6 @@
 /**
  * Vectors and analytic geometry as the UI sees them.
- * Mirrors the JSON of `crates/mv-api/src/vectors.rs` (vectors are `[x, y, z]`).
+ * Mirrors the JSON of `crates/vx-api/src/vectors.rs` (vectors are `[x, y, z]`).
  */
 import { compactLatex } from './exact-format';
 
